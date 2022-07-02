@@ -7,19 +7,28 @@
 
 const express = require('express');
 const router  = express.Router();
+const userQueries = require('../db/user-queries');
 
-module.exports = (db) => {
-  router.get("/", (req, res) => {
-    db.query(`SELECT * FROM users;`)
-      .then(data => {
-        const users = data.rows;
-        res.json({ users });
-      })
-      .catch(err => {
-        res
-          .status(500)
-          .json({ error: err.message });
-      });
-  });
-  return router;
-};
+// GET /users/
+router.get('/', (req, res) => {
+  userQueries.getUsers()
+    .then((users) => {
+      res.json(users);
+    })
+    .catch((error) => {
+      console.log(error.message);
+    });
+});
+
+// GET /users/:id
+router.get('/:id', (req, res) => {
+  userQueries.getUserById(req.params.id)
+    .then((user) => {
+      res.json(user);
+    })
+    .catch((error) => {
+      console.log(error.message);
+    });
+});
+
+module.exports = router;
