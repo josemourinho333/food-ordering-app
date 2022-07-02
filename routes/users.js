@@ -6,9 +6,7 @@
  */
 
 const express = require('express');
-const { user } = require('pg/lib/defaults');
 const router  = express.Router();
-// need to require ../db/user-queries.js
 const userQueries = require('../db/user-queries');
 
 // GET /users/
