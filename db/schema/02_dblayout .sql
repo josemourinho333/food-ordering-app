@@ -21,7 +21,7 @@ CREATE TABLE menu_items (
   name VARCHAR(255) NOT NULL,
   description VARCHAR(255) NOT NULL,
   price INTEGER NOT NULL,
-  photo_url VARCHAR(255) NOT NULL
+  photo_url TEXT NOT NULL
 );
 
 -- currently not used
@@ -35,10 +35,10 @@ CREATE TABLE total_orders (
   user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
   status_sent BOOLEAN NOT NULL,
   status_finished BOOLEAN NOT NULL,
-  time_sent DATE NOT NULL,
-  time_confirmed DATE NOT NULL,
-  time_fulfilled DATE NOT NULL,
-  time_of_pickup DATE NOT NULL
+  time_sent TIMESTAMP NOT NULL,
+  time_confirmed TIMESTAMP NOT NULL,
+  time_fulfilled TIMESTAMP NOT NULL,
+  time_of_pickup TIMESTAMP NOT NULL
 );
 
 CREATE TABLE order_items (
