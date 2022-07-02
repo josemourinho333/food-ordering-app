@@ -16,7 +16,7 @@ VALUES
 
 
 
-INSERT INTO total_orders (
+INSERT INTO orders (
     user_id, status_sent, status_finished, time_sent, time_confirmed, time_fulfilled, time_of_pickup)
     VALUES
     ( '1', 'true', 'true', '2022-07-01 00:00:00',  '2022-07-01 00:00:01', '2022-07-01 00:00:02', '2022-07-01 00:00:03'),
@@ -24,7 +24,7 @@ INSERT INTO total_orders (
 
 
 
-INSERT INTO order_items ( total_order_id, menu_item_id, quantity)
+INSERT INTO order_items ( order_id, menu_item_id, quantity)
  VALUES
  ( '1', '2', '1'),
  ( '1', '2', '1'),
