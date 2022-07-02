@@ -11,8 +11,7 @@ router.get('/', (req, res) => {
       const templateVars = {
         menuItems,
       }
-      console.log('from tv',menuItems);
-      res.render('menu', menuItems);
+      res.render('menu', templateVars);
     })
     .catch((error) => {
       console.log(error.message);
