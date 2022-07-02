@@ -33,8 +33,8 @@ CREATE TABLE menu_items (
 CREATE TABLE total_orders (
   id SERIAL PRIMARY KEY NOT NULL,
   user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
-  status_sent boolean NOT NULL,
-  status_finished boolean NOT NULL,
+  status_sent BOOLEAN NOT NULL,
+  status_finished BOOLEAN NOT NULL,
   time_sent DATE NOT NULL,
   time_confirmed DATE NOT NULL,
   time_fulfilled DATE NOT NULL,
