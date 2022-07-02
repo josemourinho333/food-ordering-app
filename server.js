@@ -7,7 +7,6 @@ const sassMiddleware = require("./lib/sass-middleware");
 const express = require("express");
 const app = express();
 const morgan = require("morgan");
-const db = require('./db/db-connect');
 
 // Load the logger first so all (static) HTTP requests are logged to STDOUT
 // 'dev' = Concise output colored by response status for development use.
@@ -34,7 +33,7 @@ const widgetsRoutes = require("./routes/widgets");
 
 // Mount all resource routes
 app.use("/users", usersRoutes);
-app.use("/api/widgets", widgetsRoutes(db));
+app.use("/widgets", widgetsRoutes);
 // Note: mount other resources here, using the same pattern above
 
 // Home page
