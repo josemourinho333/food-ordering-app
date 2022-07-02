@@ -43,7 +43,7 @@ CREATE TABLE total_orders (
 
 CREATE TABLE order_items (
   id SERIAL PRIMARY KEY NOT NULL,
-  total_orders_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+  total_order_id INTEGER REFERENCES total_orders(id) ON DELETE CASCADE,
   menu_item_id INTEGER REFERENCES menu_items(id) ON DELETE CASCADE,
   quantity INTEGER NOT NULL
  );
