@@ -1,8 +1,14 @@
 // PG database client/connection setup
-const { Pool } = require("pg");
+const pg = require('pg');
 const dbParams = require('../lib/db');
+const Pool = pg.Pool;
 
 const db = new Pool(dbParams);
-db.connect();
+
+db.connect(() => {
+  console.log('connected to database');
+});
+
+module.exports = db;
 
 
