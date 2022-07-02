@@ -7,12 +7,12 @@ DROP TABLE IF EXISTS order_items CASCADE;
 CREATE TABLE users (
   id SERIAL PRIMARY KEY NOT NULL,
   name VARCHAR(255) NOT NULL,
-  is_admin BOOLEAN NOT NULL
-  phone_number VARCHAR(255) NOT NULL
+  is_admin BOOLEAN NOT NULL,
+  phone_number VARCHAR(255) NOT NULL,
   email VARCHAR(255) NOT NULL,
-  street_address VARCHAR(255) NOT NULL
-  province VARCHAR(255) NOT NULL
-  country VARCHAR(255) NOT NULL
+  street_address VARCHAR(255) NOT NULL,
+  province VARCHAR(255) NOT NULL,
+  country VARCHAR(255) NOT NULL,
   postal_code VARCHAR(255) NOT NULL
 );
 
@@ -21,7 +21,7 @@ CREATE TABLE menu_items (
   name VARCHAR(255) NOT NULL,
   description VARCHAR(255) NOT NULL,
   price INTEGER NOT NULL,
-  photo_url VARCHAR(255) NOT NULL,
+  photo_url VARCHAR(255) NOT NULL
 );
 
 -- currently not used
@@ -38,7 +38,7 @@ CREATE TABLE total_orders (
   time_sent DATE NOT NULL,
   time_confirmed DATE NOT NULL,
   time_fulfilled DATE NOT NULL,
-  time_of_pickup DATE NOT NULL,
+  time_of_pickup DATE NOT NULL
 );
 
 CREATE TABLE order_items (
