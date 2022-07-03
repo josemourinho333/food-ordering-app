@@ -6,6 +6,7 @@ const menuQueries = require('../db/menu-queries');
 
 // get /menu/ - display menu items
 router.get('/', (req, res) => {
+  // need db/menu queries
   menuQueries.getMenuItems()
     .then((menuItems) => {
       const templateVars = {
