@@ -26,3 +26,4 @@ module.exports = {
   getUserById,
 }
 
+// List of queries
