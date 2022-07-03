@@ -60,9 +60,31 @@ const addItemToOrder = (orderID, itemID, quantity) => {
     });
 };
 
-const setPickUpTimeToOrder = (orderID, timeInMinutes) => {
-  let vals = [orderID, timeInMinutes]
-  return db.query(`UPDATE orders SET time_of_pickup = time_sent + INTERVAL '$1 minutes'  WHERE orders.id = $2 RETURNING *;`, [vals])
+// const setPickUpTimeToOrder = (orderID, timeInMinutes) => {
+//   let vals = [orderID, timeInMinutes]
+//   return db.query(`UPDATE orders SET time_of_pickup = time_sent + INTERVAL '$1 minutes'  WHERE orders.id = $2 RETURNING *;`, [vals])
+//     .then((response) => {
+//       return response.rows;
+//     })
+//     .catch((error) => {
+//       console.log(error.message);
+//     });
+// };
+
+const updateStatusWhenOrderSent = (orderID) => {
+  let vals = [orderID]
+  return db.query(`UPDATE orders SET status_sent = 'true'  WHERE orders.id = $1 RETURNING *;`, [vals])
+    .then((response) => {
+      return response.rows;
+    })
+    .catch((error) => {
+      console.log(error.message);
+    });
+};
+
+const updateStatusWhenOrderFinished = (orderID, timeInMinutes) => {
+  let vals = [orderID]
+  return db.query(`UPDATE orders SET status_finished = 'true', time_confirmed = CURRENT_TIMESTAMP, time_of_pickup = CURRENT_TIMESTAMP + INTERVAL '$2 minutes'   WHERE orders.id = $1 RETURNING *;`, [vals])
     .then((response) => {
       return response.rows;
     })
@@ -74,7 +96,7 @@ const setPickUpTimeToOrder = (orderID, timeInMinutes) => {
 // UPDATE orders SET time_of_pickup = time_sent + INTERVAL '45 minutes'  WHERE orders.id = 1 RETURNING *;
 
 module.exports = {
-  getUsers, getUserById, getAllOrdersByUserId, getAllOrdersAsAdmin, getAllItemsInOrder, addItemToOrder, setPickUpTimeToOrder
+  getUsers, getUserById, getAllOrdersByUserId, getAllOrdersAsAdmin, getAllItemsInOrder, addItemToOrder, updateStatusWhenOrderSent, updateStatusWhenOrderFinished
 }
 
 // List of queries

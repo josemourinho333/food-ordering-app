@@ -17,15 +17,15 @@ VALUES
 
 
 INSERT INTO orders (
-    user_id, status_sent, status_finished)
+    user_id)
     VALUES
-    ( '1', 'true', 'true'),
-    ( '2', 'true', 'FALSE'),
-    ( '2', 'true', 'FALSE'),
-    ( '3', 'true', 'FALSE'),
-    ( '4', 'true', 'true'),
-    ( '3', 'true', 'FALSE'),
-    ( '1', 'true', 'FALSE');
+    ( '1'),
+    ( '2'),
+    ( '2'),
+    ( '3'),
+    ( '4'),
+    ( '3'),
+    ( '1');
 
 
 
