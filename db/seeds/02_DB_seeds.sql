@@ -17,10 +17,15 @@ VALUES
 
 
 INSERT INTO orders (
-    user_id, status_sent, status_finished, time_sent, time_confirmed, time_fulfilled, time_of_pickup)
+    user_id, status_sent, status_finished)
     VALUES
-    ( '1', 'true', 'true', '2022-07-01 00:00:00',  '2022-07-01 00:00:01', '2022-07-01 00:00:02', '2022-07-01 00:00:03'),
-    ( '2', 'true', 'FALSE', '2022-07-01 00:01:00',  '2022-07-01 00:01:01', '2022-07-01 00:01:02', '2022-07-01 00:01:03');
+    ( '1', 'true', 'true'),
+    ( '2', 'true', 'FALSE'),
+    ( '2', 'true', 'FALSE'),
+    ( '3', 'true', 'FALSE'),
+    ( '4', 'true', 'true'),
+    ( '3', 'true', 'FALSE'),
+    ( '1', 'true', 'FALSE');
 
 
 
@@ -28,7 +33,11 @@ INSERT INTO order_items ( order_id, menu_item_id, quantity)
  VALUES
  ( '1', '2', '1'),
  ( '1', '2', '1'),
- ( '2', '3', '3');
+ ( '2', '3', '3'),
+ ( '3', '4', '1'),
+ ( '4', '2', '2'),
+ ( '3', '1', '3'),
+ ( '1', '1', '1');
 
 
 
