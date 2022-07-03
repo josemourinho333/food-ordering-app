@@ -6,8 +6,9 @@
  */
 
 const express = require('express');
-const { getMenuItems } = require('../db/menu-queries');
 const router  = express.Router();
+
+// Subject to change per Denis
 const userQueries = require('../db/user-queries');
 
 
@@ -15,11 +16,11 @@ const userQueries = require('../db/user-queries');
 router.get('/', (req, res) => {
   console.log('loggin sessionid', req.session.user_id);
   if (req.session.user_id === 2) {
+    // need db/users queries
     userQueries.getUsers()
     .then((users) => {
       console.log('admin page right here');
       res.send('admin page');
-      // return res.render('users', templateVars);
     })
     .catch((error) => {
       console.log(error.message);
@@ -32,6 +33,7 @@ router.get('/', (req, res) => {
 
 // GET /users/:id
 router.get('/:id', (req, res) => {
+  // need db/users queries here
   userQueries.getUserById(req.params.id)
     .then((user) => {
       const templateVars = {
