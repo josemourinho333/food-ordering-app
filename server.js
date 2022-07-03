@@ -55,7 +55,7 @@ app.use('/menu', menuRoutes);
 // Separate them into separate routes files (see above).
 
 app.get("/", (req, res) => {
-  // admin id 2
+  // admin id 2, change to whatever number you'd like here to see non-admin redirect
   req.session.user_id = 2;
   res.render("index");
 });
