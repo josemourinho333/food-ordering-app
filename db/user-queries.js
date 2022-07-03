@@ -30,8 +30,8 @@ const getAllOrdersByUserId = (id) => {
       console.log(error.message);
     });
 };
-const getAllOrdersAsAdmin = () => {
-  return db.query(`SELECT orders.* FROM orders;`)
+const getAllSentOrdersAsAdmin = () => {
+  return db.query(`SELECT orders.* FROM orders WHERE orders.status_sent = true;`)
     .then((response) => {
       return response.rows;
     })
@@ -96,7 +96,7 @@ const updateStatusOwnerConfirm = (orderID, timeInMinutes) => {
 
 
 module.exports = {
-  getUsers, getUserById, getAllOrdersByUserId, getAllOrdersAsAdmin, getAllItemsInOrder, addItemToOrder, updateStatusWhenOrderSent, updateStatusOwnerConfirm
+  getUsers, getUserById, getAllOrdersByUserId, getAllSentOrdersAsAdmin, getAllItemsInOrder, addItemToOrder, updateStatusWhenOrderSent, updateStatusOwnerConfirm
 }
 
 // List of queries
