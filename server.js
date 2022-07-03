@@ -28,15 +28,13 @@ app.use(
 app.use(express.static("public"));
 
 // Separated Routes for each Resource
-const usersRoutes = require("./routes/users");
-const widgetsRoutes = require("./routes/widgets");
-const orderRoutes = require('./routes/order');
+// const usersRoutes = require("./routes/users");
+// const widgetsRoutes = require("./routes/widgets");
+// const orderRoutes = require('./routes/order');
 const menuRoutes = require('./routes/menu');
 
 // Mount all resource routes
-app.use("/users", usersRoutes);
-app.use("/widgets", widgetsRoutes);
-app.use('/order', orderRoutes);
+// app.use("/users", usersRoutes);bootstrap.min.css
 app.use('/menu', menuRoutes);
 // Note: mount other resources here, using the same pattern above
 
