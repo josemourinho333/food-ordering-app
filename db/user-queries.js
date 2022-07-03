@@ -12,7 +12,7 @@ const getUsers = () => {
 };
 
 const getUserById = (id) => {
-  return db.query('SELECT * FROM users WHERE users.id = $1', [id])
+  return db.query('SELECT * FROM users WHERE users.id = $1;', [id])
     .then((response) => {
       return response.rows[0];
     })
@@ -21,9 +21,30 @@ const getUserById = (id) => {
     });
 };
 
+const getAllOrdersByUserId = (id) => {
+  return db.query('SELECT orders.* FROM orders JOIN users ON users.id = orders.user_id WHERE users.id = $1;', [id])
+    .then((response) => {
+      return response.rows;
+    })
+    .catch((error) => {
+      console.log(error.message);
+    });
+};
+
+const getAllItemsFromOrderId = (id) => {
+  return db.query('SELECT orders_items.* FROM order_items JOIN orders ON orders.id = orders_items.order_id WHERE orders.id = $1;', [id])
+    .then((response) => {
+      return response.rows;
+    })
+    .catch((error) => {
+      console.log(error.message);
+    });
+};
+
+
+
 module.exports = {
-  getUsers,
-  getUserById,
+  getUsers, getUserById, getAllOrdersByUserId,
 }
 
 // List of queries
