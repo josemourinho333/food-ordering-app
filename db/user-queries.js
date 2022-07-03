@@ -32,7 +32,7 @@ const getAllOrdersByUserId = (id) => {
 };
 
 const getAllItemsFromOrderId = (id) => {
-  return db.query('SELECT orders_items.* FROM order_items JOIN orders ON orders.id = orders_items.order_id WHERE orders.id = $1;', [id])
+  return db.query('SELECT order_items.* FROM order_items JOIN orders ON orders.id = order_items.order_id WHERE orders.id = 1;', [id])
     .then((response) => {
       return response.rows;
     })
@@ -44,7 +44,7 @@ const getAllItemsFromOrderId = (id) => {
 
 
 module.exports = {
-  getUsers, getUserById, getAllOrdersByUserId,
+  getUsers, getUserById, getAllOrdersByUserId, getAllItemsFromOrderId, 
 }
 
 // List of queries
