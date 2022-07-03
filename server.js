@@ -39,7 +39,6 @@ const ordersRoutes = require('./routes/orders');
 const placeOrderRoutes = require('./routes/place_order');
 const menuRoutes = require('./routes/menu');
 const adminLoginRoutes = require('./routes/admin_login');
-const { request } = require("express");
 
 // Mount all resource routes
 app.use("/users", usersRoutes);
@@ -48,6 +47,7 @@ app.use('/orders', ordersRoutes);
 app.use('/placeorder', placeOrderRoutes);
 app.use('/menu', menuRoutes);
 // app.use('/login', adminLoginRoutes);
+
 // Note: mount other resources here, using the same pattern above
 
 // Home page

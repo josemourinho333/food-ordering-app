@@ -1,5 +1,5 @@
 .themed-grid-col {
-  height: 100px;
+  height: 120px;
   padding-top: .75rem;
   padding-bottom: .75rem;
   background-color: rgba(137, 133, 120, 0.15);
@@ -22,3 +22,12 @@
   display:flex;
   justify-content: center;
 }
+
+.themed-grid-item {
+  height: 95px;
+  padding-top: .75rem;
+  padding-bottom: .75rem;
+  background-color: rgba(255, 255, 255, 0);
+  border: 1px solid rgb(0, 0, 0);
+}
+
