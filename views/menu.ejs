@@ -6,14 +6,18 @@
   <h1>MENU</h1>
 <!-- <div class="menu"> -->
   <div class="row menu">
+    <!-- <% for (key in items) {%>
+      <% console.log("key: ",key , ", value:", items[key]);%>
+      <% } %> -->
 
+    <% for (items of menuItems) {%>
     <!-- menu items -->
     <div class="col-md-9 themed-grid-col menu-item">
       <div class="row mb-3">
         <div class="col-md-2 themed-grid-item">
           <div class="pb-3">
             <div class="item-info">
-              <span>image</span>
+              <span><img class="item-pic" src=" <%= items.image_url %> "></span>
               <!-- <span>Description</span> -->
             </div>
           </div>
@@ -21,132 +25,23 @@
         <div class="col-md-6 themed-grid-item">
           <div class="pb-3">
             <div class="item-info">
-              <span>Title</span>
-              <span>Description</span>
+              <span><%= items.name %></span>
+              <span><%= items.description %></span>
             </div>
           </div>
         </div>
         <div class="col-md-3 themed-grid-item">
           <div id="add-order">
-          <span>Price: </span>
-          <span>Quantity: <input id="quantity" type="number"></span>
+          <span>Price: $<%= items.price_per_item/100 %></span>
+          <span>Quantity: <input id="quantity" placeholder="1" type="number"></span>
           <button class="btn-add">Add to Cart</button>
           </div>
         </div>
       </div>
     </div>
 
-    <div class="col-md-9 themed-grid-col menu-item">
-      <div class="row mb-3">
-        <div class="col-md-2 themed-grid-item">
-          <div class="pb-3">
-            <div class="item-info">
-              <span>image</span>
-              <!-- <span>Description</span> -->
-            </div>
-          </div>
-        </div>
-        <div class="col-md-6 themed-grid-item">
-          <div class="pb-3">
-            <div class="item-info">
-              <span>Title</span>
-              <span>Description</span>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-3 themed-grid-item">
-          <div id="add-order">
-          <span>Price: </span>
-          <span>Quantity: <input id="quantity" type="number"></span>
-          <button class="btn-add">Add to Cart</button>
-          </div>
-        </div>
-      </div>
-    </div>
+    <% } %>
 
-    <div class="col-md-9 themed-grid-col menu-item">
-      <div class="row mb-3">
-        <div class="col-md-2 themed-grid-item">
-          <div class="pb-3">
-            <div class="item-info">
-              <span>image</span>
-              <!-- <span>Description</span> -->
-            </div>
-          </div>
-        </div>
-        <div class="col-md-6 themed-grid-item">
-          <div class="pb-3">
-            <div class="item-info">
-              <span>Title</span>
-              <span>Description</span>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-3 themed-grid-item">
-          <div id="add-order">
-          <span>Price: </span>
-          <span>Quantity: <input id="quantity" type="number"></span>
-          <button class="btn-add">Add to Cart</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-md-9 themed-grid-col menu-item">
-      <div class="row mb-3">
-        <div class="col-md-2 themed-grid-item">
-          <div class="pb-3">
-            <div class="item-info">
-              <span>image</span>
-              <!-- <span>Description</span> -->
-            </div>
-          </div>
-        </div>
-        <div class="col-md-6 themed-grid-item">
-          <div class="pb-3">
-            <div class="item-info">
-              <span>Title</span>
-              <span>Description</span>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-3 themed-grid-item">
-          <div id="add-order">
-          <span>Price: </span>
-          <span>Quantity: <input id="quantity" type="number"></span>
-          <button class="btn-add">Add to Cart</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-md-9 themed-grid-col menu-item">
-      <div class="row mb-3">
-        <div class="col-md-2 themed-grid-item">
-          <div class="pb-3">
-            <div class="item-info">
-              <span>image</span>
-              <!-- <span>Description</span> -->
-            </div>
-          </div>
-        </div>
-        <div class="col-md-6 themed-grid-item">
-          <div class="pb-3">
-            <div class="item-info">
-              <span>Title</span>
-              <span>Description</span>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-3 themed-grid-item">
-          <div id="add-order">
-          <span>Price: </span>
-          <span>Quantity: <input id="quantity" type="number"></span>
-          <button class="btn-add">Add to Cart</button>
-          </div>
-        </div>
-      </div>
-    </div>
   </div>
 
 <!-- FOOTER -->

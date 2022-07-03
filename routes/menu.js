@@ -11,8 +11,9 @@ router.get('/', (req, res) => {
       const templateVars = {
         menuItems,
       }
-      console.log('from tv',menuItems);
-      res.render('menu', menuItems);
+
+      // console.log('from tv', templateVars);
+      res.render('menu', templateVars);
     })
     .catch((error) => {
       console.log(error.message);
@@ -20,3 +21,5 @@ router.get('/', (req, res) => {
 });
 
 module.exports = router;
+
+// :
