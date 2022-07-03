@@ -41,7 +41,7 @@ const getAllOrdersAsAdmin = () => {
 };
 
 const getAllItemsInOrder = (id) => {
-  return db.query(`SELECT orders.id AS order, order_items.id AS item#, menu_items.name, order_items.quantity FROM order_items JOIN menu_items ON order_items.menu_item_id = menu_items.id JOIN orders ON orders.id = order_items.order_id WHERE orders.id = $1;`, [id])
+  return db.query(`SELECT orders.id AS orderID, order_items.id AS itemNumber, menu_items.name, order_items.quantity FROM order_items JOIN menu_items ON order_items.menu_item_id = menu_items.id JOIN orders ON orders.id = order_items.order_id WHERE orders.id = $1;`, [id])
     .then((response) => {
       return response.rows;
     })
@@ -82,8 +82,8 @@ const updateStatusWhenOrderSent = (orderID) => {
     });
 };
 
-const updateStatusWhenOrderFinished = (orderID, timeInMinutes) => {
-  let vals = [orderID]
+const updateStatusOwnerConfirm = (orderID, timeInMinutes) => {
+  let vals = [orderID, timeInMinutes]
   return db.query(`UPDATE orders SET status_finished = 'true', time_confirmed = CURRENT_TIMESTAMP, time_of_pickup = CURRENT_TIMESTAMP + INTERVAL '$2 minutes'   WHERE orders.id = $1 RETURNING *;`, [vals])
     .then((response) => {
       return response.rows;
@@ -93,10 +93,10 @@ const updateStatusWhenOrderFinished = (orderID, timeInMinutes) => {
     });
 };
 
-// UPDATE orders SET time_of_pickup = time_sent + INTERVAL '45 minutes'  WHERE orders.id = 1 RETURNING *;
+
 
 module.exports = {
-  getUsers, getUserById, getAllOrdersByUserId, getAllOrdersAsAdmin, getAllItemsInOrder, addItemToOrder, updateStatusWhenOrderSent, updateStatusWhenOrderFinished
+  getUsers, getUserById, getAllOrdersByUserId, getAllOrdersAsAdmin, getAllItemsInOrder, addItemToOrder, updateStatusWhenOrderSent, updateStatusOwnerConfirm
 }
 
 // List of queries
