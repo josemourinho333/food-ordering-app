@@ -49,9 +49,20 @@ const getAllItemsInOrder = (id) => {
       console.log(error.message);
     });
 };
-const AddItemToOrder = (orderID, itemID, quantity) => {
+const addItemToOrder = (orderID, itemID, quantity) => {
   let vals = [orderID, itemID, quantity]
   return db.query(`INSERT INTO order_items ( order_id, menu_item_id, quantity)  VALUES  ( $1, $2, $3) RETURNING *;`, [vals])
+    .then((response) => {
+      return response.rows;
+    })
+    .catch((error) => {
+      console.log(error.message);
+    });
+};
+
+const setPickUpTimeToOrder = (orderID, timeInMinutes) => {
+  let vals = [orderID, timeInMinutes]
+  return db.query(`UPDATE orders SET time_of_pickup = time_sent + INTERVAL '$1 minutes'  WHERE orders.id = $2 RETURNING *;`, [vals])
     .then((response) => {
       return response.rows;
     })
@@ -63,7 +74,7 @@ const AddItemToOrder = (orderID, itemID, quantity) => {
 // UPDATE orders SET time_of_pickup = time_sent + INTERVAL '45 minutes'  WHERE orders.id = 1 RETURNING *;
 
 module.exports = {
-  getUsers, getUserById, getAllOrdersByUserId, getAllOrdersAsAdmin, getAllItemsInOrder, AddItemToOrder
+  getUsers, getUserById, getAllOrdersByUserId, getAllOrdersAsAdmin, getAllItemsInOrder, addItemToOrder, setPickUpTimeToOrder
 }
 
 // List of queries
