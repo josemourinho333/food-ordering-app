@@ -26,9 +26,6 @@ $secondary: #f2994a;
   border: 1px solid rgba(0, 123, 255, 0.2);
 }
 
-.item-pic{
-  width: -webkit-fill-available;
-}
 
 .menu {
   display: flex;
@@ -43,14 +40,23 @@ $secondary: #f2994a;
 }
 
 .item-info{
+  height:150px;
   display: flex;
   flex-direction: column;
+  justify-content: center;
+}
+
+.item-pic{
+  width: -webkit-fill-available;
+
 }
 
 #add-order {
+  height: 150px;
   display: flex;
   flex-direction: column;
   margin-left: 1.5rem;
+  justify-content: space-evenly
 }
 
 #quantity {
