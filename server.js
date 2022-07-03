@@ -7,6 +7,7 @@ const sassMiddleware = require("./lib/sass-middleware");
 const express = require("express");
 const app = express();
 const morgan = require("morgan");
+const cookieSession = require('cookie-session');
 
 // Load the logger first so all (static) HTTP requests are logged to STDOUT
 // 'dev' = Concise output colored by response status for development use.
@@ -15,6 +16,10 @@ app.use(morgan("dev"));
 
 app.set("view engine", "ejs");
 app.use(express.urlencoded({ extended: true }));
+app.use(cookieSession({
+  name: 'session',
+  keys: ['1234'],
+}));
 
 app.use(
   "/styles",
@@ -30,10 +35,19 @@ app.use(express.static("public"));
 // Separated Routes for each Resource
 const usersRoutes = require("./routes/users");
 const widgetsRoutes = require("./routes/widgets");
+const ordersRoutes = require('./routes/orders');
+const placeOrderRoutes = require('./routes/place_order');
+const menuRoutes = require('./routes/menu');
+const adminLoginRoutes = require('./routes/admin_login');
+const { request } = require("express");
 
 // Mount all resource routes
 app.use("/users", usersRoutes);
 app.use("/widgets", widgetsRoutes);
+app.use('/orders', ordersRoutes);
+app.use('/placeorder', placeOrderRoutes);
+app.use('/menu', menuRoutes);
+// app.use('/login', adminLoginRoutes);
 // Note: mount other resources here, using the same pattern above
 
 // Home page
@@ -41,6 +55,8 @@ app.use("/widgets", widgetsRoutes);
 // Separate them into separate routes files (see above).
 
 app.get("/", (req, res) => {
+  // admin id 2
+  req.session.user_id = 2;
   res.render("index");
 });
 

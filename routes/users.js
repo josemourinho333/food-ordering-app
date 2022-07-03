@@ -6,25 +6,38 @@
  */
 
 const express = require('express');
+const { getMenuItems } = require('../db/menu-queries');
 const router  = express.Router();
 const userQueries = require('../db/user-queries');
 
+
 // GET /users/
 router.get('/', (req, res) => {
-  userQueries.getUsers()
+  console.log('loggin sessionid', req.session.user_id);
+  if (req.session.user_id === 2) {
+    userQueries.getUsers()
     .then((users) => {
-      res.json(users);
+      console.log('admin page right here');
+      res.send('admin page');
+      // return res.render('users', templateVars);
     })
     .catch((error) => {
       console.log(error.message);
     });
+  } else {
+    console.log('redirect');
+    return res.redirect(`/users/${req.session.user_id}`);
+  }
 });
 
 // GET /users/:id
 router.get('/:id', (req, res) => {
   userQueries.getUserById(req.params.id)
     .then((user) => {
-      res.json(user);
+      const templateVars = {
+        user,
+      }
+      return res.render('users', templateVars);
     })
     .catch((error) => {
       console.log(error.message);
