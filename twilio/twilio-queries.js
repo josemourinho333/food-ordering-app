@@ -1,3 +1,5 @@
+// you will need to require this file inside where you want to use twilio
+
 const { sms, to, from } = require('./sms');
 
 const orderConfirmed = () => {
@@ -25,4 +27,4 @@ const orderReady = () => {
 module.exports = {
   orderConfirmed,
   orderReady,
-}
+};
