@@ -93,9 +93,18 @@ const updateStatusOwnerConfirm = (orderID, timeInMinutes) => {
     });
 };
 
+const getETAofOrder = (id) => {
+  return db.query(`SELECT (time_of_pickup - time_confirmed) AS ETA FROM orders WHERE orders.id = $1;`, [id])
+    .then((response) => {
+      return response.rows;
+    })
+    .catch((error) => {
+      console.log(error.message);
+    });
+};
 
 module.exports = {
-  getUsers, getUserById, getAllOrdersByUserId, getAllSentOrdersAsAdmin, getAllItemsInOrder, addItemToOrder, updateStatusWhenOrderSent, updateStatusOwnerConfirm
+  getUsers, getUserById, getAllOrdersByUserId, getAllSentOrdersAsAdmin, getAllItemsInOrder, addItemToOrder, updateStatusWhenOrderSent, updateStatusOwnerConfirm, getETAofOrder
 }
 
 // List of queries
