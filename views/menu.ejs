@@ -13,13 +13,13 @@
       </div>
       </div>
 
-
+      <% let item = 1;%>
 
       <!-- <div class="menu"> -->
       <div class="row menu">
         <% for (items of menuItems) {%>
         <!-- menu items -->
-        <div class="col-md-9 themed-grid-col menu-item">
+        <div class="col-md-8 themed-grid-col menu-item">
           <div class="row mb-3">
             <div class="col-md-2 themed-grid-item">
               <div class="pb-3">
@@ -42,7 +42,7 @@
             <div class="col-md-3 themed-grid-item">
               <div id="add-order">
                 <span>Price: $<%= items.price_per_item/100 %></span>
-                <!-- <form method="POST" action="/orders/new"> -->
+                <form method="POST" action="/orders/new">
                   <span
                     >Quantity:
                     <input
@@ -53,12 +53,15 @@
                       value="1"
                   /></span>
                   <input type="hidden" name="itemID" value="<%= items.id %>" />
-                  <button class="btn-add">Add to Cart</button>
-                <!-- </form> -->
+                  <div id="add-to-cart">
+                  <button id = "<%=item%>"class="btn-add">Add to Cart</button><span id="item<%=item%>" style="visibility: hidden;"><i class="fa-solid fa-check added-icon"></i></span>
+                  </div>
+                </form>
               </div>
             </div>
           </div>
         </div>
+        <% item++ %>
         <% } %>
       </div>
 

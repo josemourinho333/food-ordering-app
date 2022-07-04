@@ -8,6 +8,8 @@ $(function() {
   $(".btn-add").click(function(e){
     count++;
     $(".btn-cart").text(str+count+item);
+    const itemID = '#item'+this.id;
+    $(itemID).attr('style','visibility:visible');
   })
 });
 
