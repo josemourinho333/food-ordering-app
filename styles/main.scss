@@ -17,3 +17,18 @@ body {
 .arrow-up{
   font-size: 2rem;
 }
+
+.about{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+#about-info{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  justify-content: space-evenly;
+  font-size: 2rem;
+
+}
