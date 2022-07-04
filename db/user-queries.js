@@ -51,7 +51,7 @@ const getAllItemsInOrder = (id) => {
 };
 const addItemToOrder = (orderID, itemID, quantity) => {
   let vals = [orderID, itemID, quantity]
-  return db.query(`INSERT INTO order_items ( order_id, menu_item_id, quantity)  VALUES  ( $1, $2, $3) RETURNING *;`, [vals])
+  return db.query(`INSERT INTO order_items ( order_id, menu_item_id, quantity)  VALUES  ( $1, $2, $3) RETURNING *;`, vals)
     .then((response) => {
       return response.rows;
     })
@@ -73,7 +73,7 @@ const addItemToOrder = (orderID, itemID, quantity) => {
 
 const updateStatusWhenOrderSent = (orderID) => {
   let vals = [orderID]
-  return db.query(`UPDATE orders SET status_sent = 'true'  WHERE orders.id = $1 RETURNING *;`, [vals])
+  return db.query(`UPDATE orders SET status_sent = 'true'  WHERE orders.id = $1 RETURNING *;`, vals)
     .then((response) => {
       return response.rows;
     })
@@ -84,7 +84,7 @@ const updateStatusWhenOrderSent = (orderID) => {
 
 const updateStatusOwnerConfirm = (orderID, timeInMinutes) => {
   let vals = [orderID, timeInMinutes]
-  return db.query(`UPDATE orders SET status_finished = 'true', time_confirmed = CURRENT_TIMESTAMP, time_of_pickup = CURRENT_TIMESTAMP + INTERVAL '$2 minutes'   WHERE orders.id = $1 RETURNING *;`, [vals])
+  return db.query(`UPDATE orders SET status_finished = 'true', time_confirmed = CURRENT_TIMESTAMP, time_of_pickup = CURRENT_TIMESTAMP + INTERVAL '$2 minutes'   WHERE orders.id = $1 RETURNING *;`, vals)
     .then((response) => {
       return response.rows;
     })
@@ -92,7 +92,6 @@ const updateStatusOwnerConfirm = (orderID, timeInMinutes) => {
       console.log(error.message);
     });
 };
-
 
 
 module.exports = {
