@@ -5,6 +5,9 @@ const router = express.Router();
 const menuQueries = require('../db/menu-queries');
 const userQueries = require('../db/user-queries');
 
+
+/// CONCERN : need to alert when user adds items to cart then clicks menu link again.
+
 // get /menu/ - will create new order and display menu items.
 router.get('/', (req, res) => {
 
@@ -58,6 +61,7 @@ router.get('/order', (req, res) => {
           const templateVars = {
             items,
           }
+          console.log('items in an order', templateVars);
           res.render('neeeeed ejs file name here', templateVars)
         })
     })
