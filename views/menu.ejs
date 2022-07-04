@@ -3,6 +3,7 @@
   <%- include('partials/_head.ejs') %>
 <body>
   <%- include('partials/_header') %>
+  <div class="content">
   <h1>MENU</h1>
 <!-- <div class="menu"> -->
   <div class="row menu">
@@ -15,7 +16,7 @@
         <div class="col-md-2 themed-grid-item">
           <div class="pb-3">
             <div class="item-info">
-              <span><img class="item-pic" src=" <%= items.image_url %> "></span>
+              <span class="item-pic"><img id="cover-image" src=" <%= items.image_url %> "></span>
               <!-- <span>Description</span> -->
             </div>
           </div>
@@ -47,7 +48,7 @@
 <!-- FOOTER -->
 <h1>FOOTER</h1>
 <%- include('partials/_footer') %>
-
+</div>
 </body>
 
 

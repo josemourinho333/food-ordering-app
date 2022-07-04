@@ -1,19 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
   <%- include('partials/_head.ejs') %>
-<body>
-  <%- include('partials/_header') %>
-  <h1>My Account</h1>
-<!-- <div class="users"> -->
-  
+  <body>
+    <%- include('partials/_header') %>
+    <div class="content">
+      <h1>My Account</h1>
+      <!-- <div class="users"> -->
+      <div class="user-page">
+        <div id="user-info">
+          <span class="user-line-info">My Contact</span>
+          <span class="user-line-info">John Henry Smith</span>
+          <span class="user-line-info">604-666-6666</span>
+          <span class="user-line-info">johnhenrysmith@gmail.com</span>
+          <span class="user-line-info">102-1234 Broadway Streetasdfsdf</span>
+          <span class="user-line-info">V5E A54</span>
+          <span class="user-line-info">British Colombia</span>
+          <span class="user-line-info">Canada</span>
+          <button>Edit</button>
+
+          <span></span>
+        </div>
+        <div id="order-info">
+          <h5>Total number of Orders: </h5>
+          <span class="order-line-info">order id, date: 2018-01-01, time created: 13:15, status: active, ETA: 45mins</span>
+          <span class="order-line-info">order id, date: 2017-01-01,time created: 13:15, status: completed</span>
+          <span class="order-line-info">order id, date: 2017-01-01,time created: 13:15, status: completed</span>
+          <span class="order-line-info">order id, date: 2017-01-01,time created: 13:15, status: completed</span>
+          <span class="order-line-info">order id, date: 2017-01-01,time created: 13:15, status: completed</span>
+          <span class="order-line-info">order id, date: 2017-01-01,time created: 13:15, status: completed</span>
+          <span class="order-line-info">order id, date: 2017-01-01,time created: 13:15, status: completed</span>
+          <span class="order-line-info">order id, date: 2017-01-01,time created: 13:15, status: completed</span>
 
 
+        </div>
+      </div>
 
-
-  <h1>FOOTER</h1>
-  <%- include('partials/_footer') %>
-
-</body>
-
+      <h1>FOOTER</h1>
+      <%- include('partials/_footer') %>
+    </div>
+  </body>
 </html>
-
