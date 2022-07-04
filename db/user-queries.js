@@ -59,6 +59,16 @@ const addItemToOrder = (orderID, itemID, quantity) => {
       console.log(error.message);
     });
 };
+const createOrder = (id) => {
+  let vals = [id]
+  return db.query(`INSERT INTO orders ( user_id)  VALUES  ($1) RETURNING *;`, vals)
+    .then((response) => {
+      return response.rows[0];
+    })
+    .catch((error) => {
+      console.log(error.message);
+    });
+};
 
 // const setPickUpTimeToOrder = (orderID, timeInMinutes) => {
 //   let vals = [orderID, timeInMinutes]
@@ -104,7 +114,7 @@ const getETAofOrder = (id) => {
 };
 
 module.exports = {
-  getUsers, getUserById, getAllOrdersByUserId, getAllSentOrdersAsAdmin, getAllItemsInOrder, addItemToOrder, updateStatusWhenOrderSent, updateStatusOwnerConfirm, getETAofOrder
+  getUsers, getUserById, createOrder, getAllOrdersByUserId, getAllSentOrdersAsAdmin, getAllItemsInOrder, addItemToOrder, updateStatusWhenOrderSent, updateStatusOwnerConfirm, getETAofOrder
 }
 
 // List of queries
