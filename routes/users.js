@@ -39,6 +39,23 @@ router.get('/:id', (req, res) => {
       const templateVars = {
         user,
       }
+      return templateVars;
+    })
+    .then((templateVars) => {
+      userQueries.getAllOrdersByUserId(templateVars.user.id)
+        .then((orders) => {
+          templateVars.orders = orders;
+          return templateVars;
+        })
+        .then((templateVars) => {
+          console.log('orders not defined wut', templateVars);
+          userQueries.getAllItemsInOrder(templateVars.orders[orders.length - 1].id)
+            .then((orderItemsInTheLatestOrder) => {
+              templateVars.orderItemsInTheLatestOrder = orderItemsInTheLatestOrder;
+
+              console.log('final tempv', templateVars);
+            })
+        })
       return res.render('users', templateVars);
     })
     .catch((error) => {
