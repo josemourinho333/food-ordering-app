@@ -19,10 +19,9 @@ CREATE TABLE users (
 CREATE TABLE menu_items (
   id SERIAL PRIMARY KEY NOT NULL,
   name VARCHAR(255) NOT NULL,
-  description VARCHAR(255) NOT NULL,
-  price_per_item INTEGER NOT NULL,
-  image_url TEXT NOT NULL,
-  category TEXT
+  description TEXT NOT NULL,
+  price INTEGER NOT NULL,
+  photo_url TEXT NOT NULL
 );
 
 -- currently not used
@@ -49,5 +48,4 @@ CREATE TABLE order_items (
   menu_item_id INTEGER REFERENCES menu_items(id) ON DELETE CASCADE,
   quantity INTEGER NOT NULL
  );
-
 
