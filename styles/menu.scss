@@ -1,33 +1,106 @@
+$padding: 0.75rem;
+$color-dark: rgba(188, 184, 178, 0.2);
+$color-light: rgba(188, 184, 178, 0.2);
+$white: #fff;
+$secondary: #f2994a;
+
+// // styles
+
+//TODO change to responsive
+
+
+
 .themed-grid-col {
-  height: 120px;
-  padding-top: .75rem;
-  padding-bottom: .75rem;
-  background-color: rgba(137, 133, 120, 0.15);
-  border: 1px solid rgba(86, 61, 124, .2);
+  height: 200px;
+  padding: $padding;
+  // margin-left: $padding;
+  // padding-top: $padding;
+  // padding-bottom: $padding;
+  background-color: $color-light;
+  border: 1px solid rgba(86, 61, 124, 0.2);
 }
 
 .themed-container {
-  padding: .1rem;
-  margin-bottom: 1.5rem;
-  background-color: rgba(0, 123, 255, .15);
-  border: 1px solid rgba(0, 123, 255, .2);
+  margin-bottom: $padding;
+  background-color: $color-light;
+  border: 1px solid rgba(0, 123, 255, 0.2);
 }
-.menu-item:hover{
-  background-color: rgba(137, 130, 120, 0.26);
+
+
+.menu {
+  display: flex;
+  justify-content: center;
+  font-size: 1.5vw;
 }
-.menu-item:active{
-  background-color: rgba(255, 242, 0, 0.378);
+.themed-grid-item {
+  height: 175px;
+  padding: $padding;
+  margin-left: 1rem;
+  background-color: $color-dark;
 }
-.menu{
-  display:flex;
+
+.item-info{
+  height:150px;
+  display: flex;
+  flex-direction: column;
   justify-content: center;
 }
 
-.themed-grid-item {
-  height: 95px;
-  padding-top: .75rem;
-  padding-bottom: .75rem;
-  background-color: rgba(255, 255, 255, 0);
-  border: 1px solid rgb(0, 0, 0);
+.item-pic{
+  width: -webkit-fill-available;
+
+}
+
+#add-order {
+  height: 150px;
+  display: flex;
+  flex-direction: column;
+  margin-left: 1.5rem;
+  justify-content: space-evenly
+}
+
+#quantity {
+  width: 3rem;
+  margin-left: 0.1rem;
+}
+
+// mixin for Add btn
+@mixin mybutton($color_1, $color_2) {
+  width: 14vw;
+  margin-top: 0.5vw;
+  border: 2px solid $color_1;
+  padding: 0.5vw;
+  font-size: 1.5vw;
+  letter-spacing: 0.1vw;
+  text-transform: uppercase;
+  color: $color_1;
+  background-color: $color_2;
+  transition: all 0.25s ease-in-out;
+  &:hover {
+    background-color: $color_1;
+    border-color: $color_1;
+    color: $color_2;
+  }
+  &:active {
+    background-color: $color_1;
+    border-color: $color_1;
+    color: $color_2;
+    box-shadow: none;
+  }
+  &:focus,
+  &:active:focus {
+    background-color: $color_1;
+    border-color: $color_1;
+    color: $color_2;
+    outline: 5px auto $color_1;
+  }
+  &:visited {
+    background-color: $color_2;
+    border-color: $color_2;
+  }
+}
+
+.btn-add {
+  @include mybutton($secondary, $white);
 }
 
