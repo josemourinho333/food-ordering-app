@@ -35,16 +35,16 @@ app.use(express.static("public"));
 // Separated Routes for each Resource
 const usersRoutes = require("./routes/users");
 const widgetsRoutes = require("./routes/widgets");
-const ordersRoutes = require('./routes/orders');
-const placeOrderRoutes = require('./routes/place_order');
+// const ordersRoutes = require('./routes/orders');
+// const placeOrderRoutes = require('./routes/place_order');
 const menuRoutes = require('./routes/menu');
 const adminLoginRoutes = require('./routes/admin_login');
 
 // Mount all resource routes
 app.use("/users", usersRoutes);
 app.use("/widgets", widgetsRoutes);
-app.use('/orders', ordersRoutes);
-app.use('/placeorder', placeOrderRoutes);
+// app.use('/orders', ordersRoutes);
+// app.use('/placeorder', placeOrderRoutes);
 app.use('/menu', menuRoutes);
 // app.use('/login', adminLoginRoutes);
 
