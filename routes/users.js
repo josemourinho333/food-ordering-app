@@ -31,9 +31,8 @@ router.get('/', (req, res) => {
   }
 });
 
-// GET /users/:id
+// GET /users/:id - finds user by :id, grabs all orders by the userID, then grabs order items of the latest order. Sent to Jesse now in templateVars.
 router.get('/:id', (req, res) => {
-  // need db/users queries here
   userQueries.getUserById(req.params.id)
     .then((user) => {
       const templateVars = {
@@ -48,15 +47,18 @@ router.get('/:id', (req, res) => {
           return templateVars;
         })
         .then((templateVars) => {
-          console.log('orders not defined wut', templateVars);
-          userQueries.getAllItemsInOrder(templateVars.orders[orders.length - 1].id)
+          userQueries.getAllItemsInOrder(templateVars.orders[templateVars.orders.length - 1].id)
             .then((orderItemsInTheLatestOrder) => {
-              templateVars.orderItemsInTheLatestOrder = orderItemsInTheLatestOrder;
-
-              console.log('final tempv', templateVars);
+              templateVars.latestOrderItems = orderItemsInTheLatestOrder;
+              // ...what it looks like
+              // tempV = {
+              //   user,
+              //   orders,
+              //   latestOrderItems
+              // }
+              res.render('users', templateVars);
             })
         })
-      return res.render('users', templateVars);
     })
     .catch((error) => {
       console.log(error.message);
