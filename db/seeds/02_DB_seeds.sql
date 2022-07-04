@@ -9,10 +9,22 @@ VALUES
     INSERT INTO menu_items (
     name, description, price, photo_url)
     VALUES
-    ('Burger 1', 'Lorem Ipsum', '1000', 'data:image/png'),
-    ('Burger 2', 'Lorem Ipsum2', '1500', 'data:image/jpeg'),
-    ('Burger 4', 'Lorem Ipsum4', '2500', 'data:image/jpeg'),
-    ('Burger 5', 'Lorem Ipsum5', '3000', 'data:image/png');
+    ('Classic Burger', 'Classic Burger with Delicious Homemade Beef Patty of 200 gm, Tomato, Lettuce, Red Onion and Ridiculous Sauce.', '800', './image/classic.jpg'),
+    ('Cheese Burger', 'Classic Cheeseburger. 100% homemade Beef Patty, Mozzarella Cheese, Red Onion, Tomato, and Ridiculous Sauce.', '850', './image/cheese.jpg'),
+    ('Chicken Burger', `Chicken Fillet, Red Onion, Lettuce, Balsamic Onion and Tomato with Grilled Vegetable Alioli ... In The Best Mediterranean Style !!`, '1020', './image/chicken.jpg'),
+    ('Salmon Burger', 'Top Quality Salmon Topped with Fresh Cucumber, Avocado, Lettuce, Red Onions and Dill Alioli.', '990', './image/salmon3.jpg'),
+    ('Hawaiian Burger', 'Meat Patty or Chicken Fillet to Choose with a Delicious Slice of Caramelized Pineapple, Lettuce, Tomato, Red Onions, topped with Onions Rings and Mango Alioli.', '1100', './image/hawaiian.jpg'),
+    ('Tuna Burger', 'Fresh Yellow Fin Tuna, Avocado, Lettuce, Red Onion, Tomato and our Asian Alioli Based on Soy and Tahini', '920', './image/tuna.jpg'),
+    ('Texas Burger', 'Angus Beef Torta, Onion Rings, Bacon, American Cheese, Lettuce, Tomato, Red Onion and Siracha Alioli', '1400', './image/texas.jpg'),
+    ('Mexican Burger', 'Beef Patty, American Cheese, Guacamole, Pico de Gallo, Spacy Doritos, Lettuce, Tomato, Red Onions and Chipotle Sauce', '1320', './image/mexican1.jpg'),
+    ('Buffalo Burger', 'Excepcional Buffalo Patty, Caramelized Onions, Lettuce, Tomato, Red Onions, Mozzarella Cheese and Home-Made Alioli', '1450', './image/buffalo.jpg'),
+    ('Not So Burger', 'Low Carb and Gluten Free, Choose Lean Beef Patty or Chicken Fillet, Mozarrella Cheese, Cucumber, Red Onion in Vinaigrette, Tomato, Wrapped in Fresh Lettuce', '1170', './image/notburger.jpg'),
+    ('The King Burger', 'High Quality Premium Rib Eye Burger ( 250Gr) of the Best Quality!!!Cooked on The Grill, with melted Mozarrella Chesse, Onion Rings, Lettuce, Tomato, Red Onions, Sauteed Onions, Red Peppers, Mushrooms, Marinated with Original Steak Sauce and Roastd Vegetables Alioli', '1990', './image/king.jpg'),
+    ('Lamb Burger', 'Lamb Patty, Mozarrella Cheese, Mint Jelly, Lettuce, Tomato, Red Onions, Red Peppers, Sautéed Onions and Ridiculous Alioli', '1700', './image/lamb.jpg'),
+    ('Bomb Burger', 'Delicious Beef Patty with Special Cheeses, That Deliver and Explosion of Secret and Unique Flavor!! Wrapped in Bacon, with Tomato, Lettuce, Red Onions and Ridiculous Alioli', '1750', './image/bomb.jpg'),
+    ('French Fries', 'Choose your favourite side to burger', '1700', './image/fries.jpg'),
+    ('Onion Rings', 'Choose your favourite side to burger', '2150', './image/onionrings.jpg'),
+    ('Sweet Potato Fries', 'Choose your favourite side to burger', '1900', './image/sweetpotato.jpg');
 
 
 
