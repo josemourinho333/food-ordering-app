@@ -2,7 +2,7 @@
 <html lang="en">
   <%- include('partials/_head.ejs') %>
 <body>
-  <%- include('header') %>
+  <%- include('partials/_header') %>
   <h1>MENU</h1>
 <!-- <div class="menu"> -->
 
@@ -28,73 +28,45 @@
 
     <div class="col-md-5 themed-grid-col menu-item">
       <div class="row mb-3">
-        <div class="col-md-10 themed-grid-item">
+        <div class="col-md-2 themed-grid-item">
           <div class="pb-3">
-            <div>
-              <span>Title</span>
-              <span>Description</span>
+            <div class="item-info">
+              <span><img class="item-pic" src=" <%= items.image_url %> "></span>
+              <!-- <span>Description</span> -->
             </div>
           </div>
         </div>
-        <div class="col-md-2 themed-grid-item">
-          <span>Price</span>
+        <div class="col-md-6 themed-grid-item">
+          <div class="pb-3">
+            <div class="item-info">
+              <span><%= items.name %></span>
+              <span><%= items.description %></span>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3 themed-grid-item">
+          <div id="add-order">
+          <span>Price: $<%= items.price_per_item/100 %></span>
+          <form method="POST" action="/orders/new">
+            <span>Quantity: <input id="quantity" placeholder="1" type="number" name="quantity"></span>
+            <input type="hidden" name="itemID" value="<%= items.id %>">
+            <button class="btn-add">Add to Cart</button>
+          </form>
+          </div>
         </div>
       </div>
     </div>
 
-    <div class="col-md-5 themed-grid-col menu-item">
-      <div class="row mb-3">
-        <div class="col-md-10 themed-grid-item">
-          <div class="pb-3">
-            <div>
-              <span>Title</span>
-              <span>Description</span>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-2 themed-grid-item">
-          <span>Price</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-md-5 themed-grid-col menu-item">
-      <div class="row mb-3">
-        <div class="col-md-10 themed-grid-item">
-          <div class="pb-3">
-            <div>
-              <span>Title</span>
-              <span>Description</span>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-2 themed-grid-item">
-          <span>Price</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-md-5 themed-grid-col menu-item">
-      <div class="row mb-3">
-        <div class="col-md-10 themed-grid-item">
-          <div class="pb-3">
-            <div>
-              <span>Title</span>
-              <span>Description</span>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-2 themed-grid-item">
-          <span>Price</span>
-        </div>
-      </div>
-    </div>
+    <% } %>
 
   </div>
 
-
+<!-- FOOTER -->
+<h1>FOOTER</h1>
+<%- include('partials/_footer') %>
 
 </body>
+
 
 </html>
 
