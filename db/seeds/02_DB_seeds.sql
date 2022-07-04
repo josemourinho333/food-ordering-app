@@ -11,7 +11,7 @@ VALUES
     VALUES
     ('Classic Burger', 'Classic Burger with Delicious Homemade Beef Patty of 200 gm, Tomato, Lettuce, Red Onion and Ridiculous Sauce.', '800', './image/classic.jpg'),
     ('Cheese Burger', 'Classic Cheeseburger. 100% homemade Beef Patty, Mozzarella Cheese, Red Onion, Tomato, and Ridiculous Sauce.', '850', './image/cheese.jpg'),
-    ('Chicken Burger', `Chicken Fillet, Red Onion, Lettuce, Balsamic Onion and Tomato with Grilled Vegetable Alioli ... In The Best Mediterranean Style !!`, '1020', './image/chicken.jpg'),
+    ('Chicken Burger', 'Chicken Fillet, Red Onion, Lettuce, Balsamic Onion and Tomato with Grilled Vegetable Alioli ... In The Best Mediterranean Style !!', '1020', './image/chicken.jpg'),
     ('Salmon Burger', 'Top Quality Salmon Topped with Fresh Cucumber, Avocado, Lettuce, Red Onions and Dill Alioli.', '990', './image/salmon3.jpg'),
     ('Hawaiian Burger', 'Meat Patty or Chicken Fillet to Choose with a Delicious Slice of Caramelized Pineapple, Lettuce, Tomato, Red Onions, topped with Onions Rings and Mango Alioli.', '1100', './image/hawaiian.jpg'),
     ('Tuna Burger', 'Fresh Yellow Fin Tuna, Avocado, Lettuce, Red Onion, Tomato and our Asian Alioli Based on Soy and Tahini', '920', './image/tuna.jpg'),
@@ -22,9 +22,9 @@ VALUES
     ('The King Burger', 'High Quality Premium Rib Eye Burger ( 250Gr) of the Best Quality!!!Cooked on The Grill, with melted Mozarrella Chesse, Onion Rings, Lettuce, Tomato, Red Onions, Sauteed Onions, Red Peppers, Mushrooms, Marinated with Original Steak Sauce and Roastd Vegetables Alioli', '1990', './image/king.jpg'),
     ('Lamb Burger', 'Lamb Patty, Mozarrella Cheese, Mint Jelly, Lettuce, Tomato, Red Onions, Red Peppers, Sautéed Onions and Ridiculous Alioli', '1700', './image/lamb.jpg'),
     ('Bomb Burger', 'Delicious Beef Patty with Special Cheeses, That Deliver and Explosion of Secret and Unique Flavor!! Wrapped in Bacon, with Tomato, Lettuce, Red Onions and Ridiculous Alioli', '1750', './image/bomb.jpg'),
-    ('French Fries', 'Choose your favourite side to burger', '1700', './image/fries.jpg'),
-    ('Onion Rings', 'Choose your favourite side to burger', '2150', './image/onionrings.jpg'),
-    ('Sweet Potato Fries', 'Choose your favourite side to burger', '1900', './image/sweetpotato.jpg');
+    ('French Fries', 'Choose your favourite side to burger', '170', './image/fries.jpg'),
+    ('Onion Rings', 'Choose your favourite side to burger', '210', './image/onionrings.jpg'),
+    ('Sweet Potato Fries', 'Choose your favourite side to burger', '190', './image/sweetpotato.jpg');
 
 
 
