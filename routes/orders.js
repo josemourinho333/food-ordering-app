@@ -20,28 +20,28 @@ const order = {
 }
 
 // get /orders/ - display list of all orders if admin, else redirect to /orders/:id
-router.get('/', (req, res) => {
-  if (!admin) {
-    console.log('hell nah you aint admin');
-    return res.render('index');
-  }
-  // need db/order queries
-  ordersQueries.getAllOrders()
-  .then((allOrders) => {
-    const templateVars = {
-      allOrders,
-    }
-    console.log('all orders', templateVars);
-    /// testing
-    txtSend.orderConfirmed(order);
-    // txtSend.orderReady(order);
-    ///
-    res.render('orders', templateVars);
-  })
-  .catch((error) => {
-    console.log(error.message);
-  })
-});
+// router.get('/', (req, res) => {
+//   if (!admin) {
+//     console.log('hell nah you aint admin');
+//     return res.render('index');
+//   }
+//   // need db/order queries
+//   ordersQueries.getAllOrders()
+//   .then((allOrders) => {
+//     const templateVars = {
+//       allOrders,
+//     }
+//     console.log('all orders', templateVars);
+//     /// testing
+//     txtSend.orderConfirmed(order);
+//     // txtSend.orderReady(order);
+//     ///
+//     res.render('orders', templateVars);
+//   })
+//   .catch((error) => {
+//     console.log(error.message);
+//   })
+// });
 
 /// MOVED TO menu.js now with /menu/orders/:id post request.
 
