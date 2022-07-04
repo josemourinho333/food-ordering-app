@@ -34,12 +34,13 @@ CREATE TABLE menu_items (
 CREATE TABLE orders (
   id SERIAL PRIMARY KEY NOT NULL,
   user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
-  status_sent BOOLEAN NOT NULL,
-  status_finished BOOLEAN NOT NULL,
-  time_sent TIMESTAMP NOT NULL,
-  time_confirmed TIMESTAMP NOT NULL,
-  time_fulfilled TIMESTAMP NOT NULL,
-  time_of_pickup TIMESTAMP NOT NULL
+  status_sent BOOLEAN NOT NULL DEFAULT false,
+  status_finished BOOLEAN NOT NULL DEFAULT false,
+  time_sent TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  time_confirmed TIMESTAMP DEFAULT CURRENT_TIMESTAMP + INTERVAL '10 minutes',
+  -- time_fulfilled not used currently
+  -- time_fulfilled TIMESTAMP NOT NULL,
+  time_of_pickup TIMESTAMP DEFAULT CURRENT_TIMESTAMP + INTERVAL '45 minutes'
 );
 
 CREATE TABLE order_items (
