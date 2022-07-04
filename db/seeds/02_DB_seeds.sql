@@ -52,4 +52,3 @@ INSERT INTO order_items ( order_id, menu_item_id, quantity)
  ( '1', '1', '1');
 
 
-
