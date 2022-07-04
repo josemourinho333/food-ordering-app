@@ -17,28 +17,39 @@ router.get('/', (req, res) => {
           }
           console.log('templatevars', templateVars.newOrder);
           // needs to menu/orders/:id here and pass data.
-          res.render(`menu`, templateVars)
+          res.render(`testmenuid.ejs`, templateVars)
         })
     })
     .catch((error) => {console.log(error)});
 });
 
-// post /menu/orders/:id - add to cart posts.
-router.post('/', (req, res) => {
+// post /menu/add - add to cart posts.
+router.post('/add', (req, res) => {
   console.log('reqbody', req.body);
+  // need a query to find order based on req.body.user_id
   // group req.body info and req.params.id into one obj.
   const orderItem = {
     quantity: req.body.quantity,
     itemId: req.body.itemID,
-    // needs to be replaced with req.params.id instead of number.
-    orderId: 30
+    orderId: 18
   }
   // db query to insert this obj into orders_items
   menuQueries.addNewItem(orderItem)
     //should get back inserted order_item but take the order_id.
-    .then(() => {
-      // here need to render again with the same /menu/order/:id
-      res.render(`menu`);
+    .then((item) => {
+      return item;
+    })
+    .then((item) => {
+      menuQueries.getMenuItems()
+        .then((menuItems) => {
+          const templateVars = {
+            orderId: item.order_id,
+            menuItems
+          }
+          console.log('varrrrr', templateVars.orderId);
+          // here need to render again with the same /menu/order/:id
+          res.render('testmenuid.ejs', templateVars);
+        })
     })
     .catch((error) => {console.log(error.message)});
 });
