@@ -49,4 +49,3 @@ CREATE TABLE order_items (
   quantity INTEGER NOT NULL
  );
 
-
