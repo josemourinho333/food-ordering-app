@@ -5,7 +5,8 @@ $(function() {
   let str = 'Check Out ';
   let item = ' items';
   $(".btn-cart").text(str+count+item);
-  $(".btn-add").click(function(e){
+  $(".btn-add").click(function(event){
+    event.preventDefault();
     count++;
     $(".btn-cart").text(str+count+item);
     const itemID = '#item'+this.id;

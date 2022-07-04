@@ -1,8 +1,11 @@
 
-$(function() {
-$(".arrow-up").click(function(){
-  $("html, body").animate({
-    scrollTop: 0
-}, 2000);
-})
+$(document).ready(function () {
+
+  $(".btn-arrow-up").click(function (event) {
+    event.preventDefault();
+
+    $("html, body").animate({
+      scrollTop: 0
+    }, 100);
+  })
 });
