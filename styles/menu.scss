@@ -2,7 +2,8 @@ $padding: 0.75rem;
 $color-dark: rgba(188, 184, 178, 0.2);
 $color-light: rgba(188, 184, 178, 0.2);
 $white: #fff;
-$secondary: #f2994a;
+$check-out: rgb(18, 143, 246);
+$add-cart: #f2994a;
 
 // // styles
 
@@ -50,6 +51,21 @@ $secondary: #f2994a;
   align-self: center;
 }
 
+#menu-bar{
+  display: flex;
+  flex-direction:row;
+  justify-content: center;
+  width:100%;
+}
+
+#menu-cart{
+  display: flex;
+  position: fixed;
+  margin-top: 0;
+  margin-left: 88%;
+  z-index: 9;
+}
+
 #cover-image{
   width:7.5vw;
 }
@@ -68,11 +84,11 @@ $secondary: #f2994a;
 }
 
 // mixin for Add btn
-@mixin mybutton($color_1, $color_2) {
-  width: 14vw;
+@mixin mybutton($width, $padding, $color_1, $color_2) {
+  width: $width;
   margin-top: 0.5vw;
   border: 2px solid $color_1;
-  padding: 0.5vw;
+  padding: $padding;
   font-size: 1rem;
   letter-spacing: 0.1vw;
   text-transform: uppercase;
@@ -104,6 +120,11 @@ $secondary: #f2994a;
 }
 
 .btn-add {
-  @include mybutton($secondary, $white);
+  @include mybutton(14vw,0.5vw,$add-cart, $white);
 }
+.btn-cart{
+  @include mybutton(8vw,0, $check-out,$white);
+}
+
+
 
