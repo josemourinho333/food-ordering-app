@@ -1,20 +1,5 @@
 body {
-  // display: flex;
-  // justify-content: center;
-  // // align-items: center;
-  // min-height: 100vh;
-
-  // background: rgb(163, 208, 219);
-  // background: linear-gradient(
-  //   227deg,
-  //   rgba(163, 208, 219, 1) 0%,
-  //   rgba(163, 176, 219, 1) 20%,
-  //   rgba(163, 173, 219, 1) 34%,
-  //   rgba(163, 219, 208, 1) 59%,
-  //   rgba(163, 208, 219, 1) 74%,
-  //   rgba(163, 208, 219, 1) 100%
-  // );
-  // font-size: 1vw;
+  overflow: auto;
 }
 
 .logo{
@@ -23,4 +8,12 @@ body {
 #btn-login{
   margin-top: 30%;
   margin-left: 10px;
+}
+
+.foot-icons{
+  margin-right: 20px;
+}
+
+.arrow-up{
+  font-size: 2rem;
 }
