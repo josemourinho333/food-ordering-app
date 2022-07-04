@@ -32,7 +32,7 @@
           <div id="add-order">
           <span>Price: $<%= items.price_per_item/100 %></span>
           <form method="POST" action="/orders/new">
-            <span>Quantity: <input id="quantity" placeholder="1" type="number" name="quantity"></span>
+            <span>Quantity: <input id="quantity" placeholder="1" type="number" name="quantity" value="1"></span>
             <input type="hidden" name="itemID" value="<%= items.id %>">
             <button class="btn-add">Add to Cart</button>
           </form>

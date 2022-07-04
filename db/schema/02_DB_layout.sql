@@ -20,8 +20,9 @@ CREATE TABLE menu_items (
   id SERIAL PRIMARY KEY NOT NULL,
   name VARCHAR(255) NOT NULL,
   description VARCHAR(255) NOT NULL,
-  price INTEGER NOT NULL,
-  photo_url TEXT NOT NULL
+  price_per_item INTEGER NOT NULL,
+  image_url TEXT NOT NULL,
+  category TEXT
 );
 
 -- currently not used
