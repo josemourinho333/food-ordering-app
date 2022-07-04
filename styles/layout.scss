@@ -4,4 +4,19 @@ body,
 html {
   margin: 0;
 }
+header{
+  margin-top: 0px;
+  position: fixed;
+  z-index: 1;
+  width:100vw;
+}
+.content{
+  margin-top: 110px;
+  position: absolute;
+  width: 100vw;
+  // z-index: 1;
+}
 
+h1 {
+  text-align: center;
+}

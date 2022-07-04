@@ -20,7 +20,7 @@ router.get('/', (req, res) => {
     userQueries.getUsers()
     .then((users) => {
       console.log('admin page right here');
-      res.send('admin page');
+      res.render('users');
     })
     .catch((error) => {
       console.log(error.message);
