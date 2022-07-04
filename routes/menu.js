@@ -11,7 +11,7 @@ const userQueries = require('../db/user-queries');
 // get /menu/ - will create new order and display menu items.
 router.get('/', (req, res) => {
 
-  menuQueries.addNewOrder(req.session.user_id)
+  userQueries.createOrder(req.session.user_id)
     .then((newOrder) => {
       menuQueries.getMenuItems()
         .then((menuItems) => {
@@ -38,12 +38,20 @@ router.post('/add', (req, res) => {
       userQueries.addItemToOrder(orderID, itemID, quantity)
         .then((result) => {
           console.log('result', result);
-          menuQueries.getMenuItems()
-            .then((menuItems) => {
-              const templateVars = {
-                menuItems,
-              }
-              res.render('menu', templateVars);
+          userQueries.getAllItemsInOrder(result[0].order_id)
+            .then((ordered) => {
+              return ordered;
+            })
+            .then((ordered) => {
+              menuQueries.getMenuItems()
+                .then((menuItems) => {
+                  const templateVars = {
+                    menuItems,
+                    ordered,
+                  }
+                  console.log('**tempv**', templateVars.ordered);
+                  res.render('menu', templateVars);
+                })
             })
         })
     })
@@ -69,12 +77,32 @@ router.get('/order', (req, res) => {
 
 // need twilio
 const txtSend = require('../twilio/twilio-queries');
+
+//TESTING
+const MessagingResponse = require('twilio').twiml.MessagingResponse;
 // POST /menu/order/submit - user clicks place order b utton and places the order. Twilio stuff should happen here
 router.post('/order/submit', (req, res) => {
-  const test = {
-    id: 69,
-  }
-  txtSend.orderReady(test);
+  const test = 73;
+  userQueries.updateStatusWhenOrderSent(test)
+    .then((confirmedOrder) => {
+      console.log('order confirmed', confirmedOrder);
+    })
+    .catch((error) => {console.log(error.message)});
+  // console.log(req.body);
+
+  // const twiml = new MessagingResponse();
+  // twiml.message('the robots are coming');
+
+  // res.writeHead(200, {'Content-Type': 'text/xml'});
+  // res.end(twiml.toString());
+
+
+  // txtSend.newOrder(test)
+  //   .then((result) => {
+  //     console.log('result', result);
+  //     txtSend.replyFromOwner();
+  //   })
+  //   .catch((error) => {console.log(error)});
 })
 
 module.exports = router;
