@@ -73,7 +73,7 @@ const addItemToOrder = (orderID, itemID, quantity) => {
 
 const updateStatusWhenOrderSent = (orderID) => {
   let vals = [orderID]
-  return db.query(`UPDATE orders SET status_sent = 'true', time_sent = CURRENT_TIMESTAMP,  WHERE orders.id = $1 RETURNING *;`, vals)
+  return db.query(`UPDATE orders SET status_sent = 'true', time_sent = CURRENT_TIMESTAMP  WHERE orders.id = $1 RETURNING *;`, vals)
     .then((response) => {
       return response.rows;
     })
