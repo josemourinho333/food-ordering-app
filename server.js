@@ -38,7 +38,7 @@ const widgetsRoutes = require("./routes/widgets");
 // const ordersRoutes = require('./routes/orders');
 // const placeOrderRoutes = require('./routes/place_order');
 const menuRoutes = require('./routes/menu');
-const adminLoginRoutes = require('./routes/admin_login');
+// const adminLoginRoutes = require('./routes/admin_login');
 
 // Mount all resource routes
 app.use("/users", usersRoutes);
