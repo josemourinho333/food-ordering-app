@@ -3,7 +3,7 @@
 
 const express = require('express');
 const router = express.Router();
-const placeOrderQueries = require('../db/place-order-queries');
+// const placeOrderQueries = require('../db/place-order-queries');
 
 // GET /order/ - customer sees the menu basically
 router.get('/', (req, res) => {

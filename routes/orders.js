@@ -3,7 +3,7 @@ const router = express.Router();
 const txtSend = require('../twilio/twilio-queries');
 
 // subject to change per Denis
-const ordersQueries = require('../db/orders-queries');
+// const ordersQueries = require('../db/orders-queries');
 // const { twilioParams } = require('../twilio/twilio-setup');
 // const { sms } = require('../twilio/sms');
 

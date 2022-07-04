@@ -22,7 +22,8 @@ const getUserById = (id) => {
 };
 
 const getAllOrdersByUserId = (id) => {
-  return db.query(`SELECT orders.* FROM orders JOIN users ON users.id = orders.user_id WHERE users.id = $1;`, [id])
+  // console.log('id',id)
+  return db.query(`SELECT orders.* FROM orders JOIN users ON users.id = orders.user_id WHERE users.id = $1 ORDER BY orders.time_sent DESC;`, [id])
     .then((response) => {
       return response.rows;
     })
@@ -49,8 +50,8 @@ const getAllItemsInOrder = (id) => {
       console.log(error.message);
     });
 };
-const addItemToOrder = (orderID, itemID, quantity) => {
-  let vals = [orderID, itemID, quantity]
+const addItemToOrder = (item) => {
+  let vals = [item.orderId, item.itemId, item.quantity]
   return db.query(`INSERT INTO order_items ( order_id, menu_item_id, quantity)  VALUES  ( $1, $2, $3) RETURNING *;`, vals)
     .then((response) => {
       return response.rows;
