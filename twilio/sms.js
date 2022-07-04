@@ -1,5 +1,4 @@
 // Twilio client/connection set up
-// require("dotenv").config(); // not needed when server is ran.
 
 const twilio = require('twilio');
 const { accountSid, authToken } = require('./twilio-setup');

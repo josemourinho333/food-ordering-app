@@ -6,13 +6,12 @@ const menuQueries = require('../db/menu-queries');
 
 // get /menu/ - display menu items
 router.get('/', (req, res) => {
+  // need db/menu queries
   menuQueries.getMenuItems()
     .then((menuItems) => {
       const templateVars = {
         menuItems,
       }
-
-      // console.log('from tv', templateVars);
       res.render('menu', templateVars);
     })
     .catch((error) => {
