@@ -48,7 +48,23 @@
         </form>
 
         <div class="text-end">
-          <button type="button" class="btn btn-light text-dark me-2">Login</button>
+          <form action="/orders/new" method="POST">
+            <label for="userId">User ID</label>
+            <input type="hidden" name="userId" value="3">
+            <label for="statusSent">status sent</label>
+            <input type="hidden" name="statusSent" value="true">
+            <label for="statusFinished">status finished</label>
+            <input type="hidden" name="statusFinished" value="false">
+            <label for="timeSent">time sent</label>
+            <input type="hidden" name="timeSent" value='2022-07-03'>
+            <label for="timeConfirmed">time confirmed</label>
+            <input type="hidden" name="timeConfirmed" value='2022-07-03'>
+            <label for="timeFulfilled">time fulfilled</label>
+            <input type="hidden" name="timeFulfilled" value='2022-07-03'>
+            <label for="timeOfPickup">time of pick up</label>
+            <input type="hidden" name="timeOfPickup" value='2022-07-03'>
+          <button type="submit button" class="btn btn-light text-dark me-2">Login</button>
+        </form>
           <button type="button" class="btn btn-primary">Sign-up</button>
         </div>
       </div>
