@@ -3,10 +3,11 @@ const router = express.Router();
 
 // subject to change per Denis
 const menuQueries = require('../db/menu-queries');
+const userQueries = require('../db/user-queries');
 
 // get /menu/ - will create new order and display menu items.
 router.get('/', (req, res) => {
-  // db query to create new order - needs changed once Denis is done
+
   menuQueries.addNewOrder(req.session.user_id)
     .then((newOrder) => {
       menuQueries.getMenuItems()
@@ -16,42 +17,50 @@ router.get('/', (req, res) => {
             menuItems,
           }
           console.log('templatevars', templateVars.newOrder);
-          // needs to menu/orders/:id here and pass data.
-          res.render(`testmenuid.ejs`, templateVars)
+          res.render(`menu`, templateVars)
         })
     })
     .catch((error) => {console.log(error)});
 });
 
-// post /menu/add - add to cart posts.
+// post /menu/add - add items to order_items table to be called upon later for placing order.
 router.post('/add', (req, res) => {
   console.log('reqbody', req.body);
-  // need a query to find order based on req.body.user_id
-  // group req.body info and req.params.id into one obj.
-  const orderItem = {
-    quantity: req.body.quantity,
-    itemId: req.body.itemID,
-    orderId: 18
-  }
-  // db query to insert this obj into orders_items
-  menuQueries.addNewItem(orderItem)
-    //should get back inserted order_item but take the order_id.
-    .then((item) => {
-      return item;
-    })
-    .then((item) => {
-      menuQueries.getMenuItems()
-        .then((menuItems) => {
-          const templateVars = {
-            orderId: item.order_id,
-            menuItems
-          }
-          console.log('varrrrr', templateVars.orderId);
-          // here need to render again with the same /menu/order/:id
-          res.render('testmenuid.ejs', templateVars);
+  userQueries.getAllOrdersByUserId(req.session.user_id)
+    .then((orders) => {
+      const orderID = orders[orders.length - 1].id;
+      const itemID = req.body.itemID;
+      const quantity = req.body.quantity;
+
+      userQueries.addItemToOrder(orderID, itemID, quantity)
+        .then((result) => {
+          console.log('result', result);
+          menuQueries.getMenuItems()
+            .then((menuItems) => {
+              const templateVars = {
+                menuItems,
+              }
+              res.render('menu', templateVars);
+            })
         })
     })
-    .catch((error) => {console.log(error.message)});
+    .catch((error) => {console.log(error)});
+});
+
+// GET /menu/order - takes user to checkout that displays all items in an order
+router.get('/order', (req, res) => {
+  userQueries.getAllOrdersByUserId(req.session.user_id)
+    .then((orders) => {
+      console.log('from 1st query', orders[orders.length - 1]);
+      const currentOrderID = orders[orders.length - 1].id;
+      userQueries.getAllItemsInOrder(currentOrderID)
+        .then((items) => {
+          const templateVars = {
+            items,
+          }
+          res.render('neeeeed ejs file name here', templateVars)
+        })
+    })
 });
 
 module.exports = router;
