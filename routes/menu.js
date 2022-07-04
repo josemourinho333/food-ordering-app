@@ -67,4 +67,14 @@ router.get('/order', (req, res) => {
     })
 });
 
+// need twilio
+const txtSend = require('../twilio/twilio-queries');
+// POST /menu/order/submit - user clicks place order b utton and places the order. Twilio stuff should happen here
+router.post('/order/submit', (req, res) => {
+  const test = {
+    id: 69,
+  }
+  txtSend.orderReady(test);
+})
+
 module.exports = router;
