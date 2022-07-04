@@ -94,9 +94,9 @@ const updateStatusOwnerConfirm = (orderID, timeInMinutes) => {
 };
 
 const getETAofOrder = (id) => {
-  return db.query(`SELECT (time_of_pickup - time_confirmed) AS ETA FROM orders WHERE orders.id = $1;`, [id])
+  return db.query(`SELECT EXTRACT(EPOCH FROM (time_of_pickup - time_confirmed)/60) AS ETA FROM orders WHERE orders.id = $1;`, [id])
     .then((response) => {
-      return response.rows;
+      return response.rows[0];
     })
     .catch((error) => {
       console.log(error.message);
