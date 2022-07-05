@@ -67,10 +67,17 @@
                   <span class="field">Status:</span>
                   <%= status %>
                 </span>
+
+                <% if (order.time_of_pickup != null){%>
                 <span class="line-detail-box stat-active">
                   <span class="field">Ready By:</span>
                   <%= ETA.slice(16,21) %>
                 </span>
+                <% } else { %>
+                  <span class="line-detail-box stat-active">
+                    <span class="field">Waiting confirmation</span>
+                  </span>
+                <% } %>
                 <% } else { %>
 
 
