@@ -3,12 +3,51 @@
   <%- include('partials/_head.ejs') %>
 <body>
   <%- include('partials/_header') %>
-  <h1>Orders</h1>
+
 <!-- <div class="menu"> -->
+  <div class="content">
+    <h1>Place Orders</h1>
 
 
-  <h1>FOOTER</h1>
-  <%- include('partials/_footer') %>
+    <% if (items.length>0) {%>
+    <h5>Total number of items Orded: <%= items.length %> for Order ID: <%= items[0].orderid %> </h5>
+    <div id="total-ordered-item">
+    <% for (item of items) {%>
+
+      <div class="added-item">
+
+          <span class="added-desc"><%= item.name %></span>
+          <span>x</span>
+          <form method ="POST" action="update?">
+          <span class="added-desc"> Quantity:
+            <input
+            id="quantity"
+            type="number"
+            name="quantity"
+            value="<%= item.quantity %>"/>
+          </span>
+          <span class="added-desc">price: $<%=item.quantity*item.price/100%></span>
+          <button id="btn-update">Update</button>
+
+
+      </div>
+
+    <% } %>
+    <form method="POST" action="submit?"><button id="place-order">Place Order</button></form>
+
+    <%} else { %>
+     <p> 0 Items in Cart 🛒</p>
+     <div id="filler"></div>
+    <%}%>
+
+    <%- include('partials/_footer') %>
+    </div>
+
+  </div>
+
+
+
+
 
 </body>
 

@@ -8,7 +8,7 @@
       <h1>MENU</h1>
       <div id="menu-cart">
         <form method="GET" action="/menu/order">
-          <button type="add" class="btn-cart">Check Out </button>
+          <button type="add" class="btn-cart">Check Out <%= ordered.length%> items</button>
         </form>
       </div>
       </div>
@@ -25,7 +25,7 @@
               <div class="pb-3">
                 <div class="item-info">
                   <span class="item-pic"
-                    ><img id="cover-image" src=" <%= items.photo_url %> "
+                    ><img id="cover-image" alt="<%= items.photo_url %>" src=" <%= items.photo_url %> "
                   /></span>
                   <!-- <span>Description</span> -->
                 </div>
@@ -43,18 +43,25 @@
               <div id="add-order">
                 <span>Price: $<%= items.price/100 %></span>
                 <form method="POST" action="/menu/add">
-                  <span
-                    >Quantity:
+                  <span>Quantity:
                     <input
                       id="quantity"
                       placeholder="1"
                       type="number"
                       name="quantity"
-                      value="1"
-                  /></span>
+                      value="1"/>
+                  </span>
                   <input type="hidden" name="itemID" value="<%= items.id %>" />
                   <div id="add-to-cart">
-                  <button id = "<%=item%>"class="btn-add">Add to Cart</button><span id="item<%=item%>" style="visibility: hidden;"><i class="fa-solid fa-check added-icon"></i></span>
+                  <button id = "<%=item%>" class="btn-add">Add to Cart</button>
+
+                  <% for(order of ordered) {%>
+                    <% if(order.itemnumber == items.id) { %>
+                  <span id="item<%=item%>" style="visibility: visible;">
+                    <i class="fa-solid fa-check added-icon"></i>
+
+                  <% break;}}  %>
+                  </span>
                   </div>
                 </form>
               </div>
@@ -66,7 +73,6 @@
       </div>
 
       <!-- FOOTER -->
-      <h1>FOOTER</h1>
       <%- include('partials/_footer') %>
     </div>
   </body>
