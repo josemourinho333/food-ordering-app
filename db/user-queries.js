@@ -120,7 +120,7 @@ const getETAofOrder = (id) => {
 };
 
 const getTotalInOrder = (id) => {
-  return db.query(`SELECT orders.id AS orderID, COUNT(order_items.id) AS total_items, SUM(menu_items.price*order_items.quantity) AS total_sum FROM order_items JOIN menu_items ON order_items.menu_item_id = menu_items.id JOIN orders ON orders.id = order_items.order_id WHERE orders.id = $1 GROUP BY orders.id;`, [id])
+  return db.query(`SELECT orders.id AS orderID, COUNT(order_items.id) AS total_positions, SUM(order_items.quantity) AS total_quantity, SUM(menu_items.price*order_items.quantity) AS total_sum FROM order_items JOIN menu_items ON order_items.menu_item_id = menu_items.id JOIN orders ON orders.id = order_items.order_id WHERE orders.id = $1 GROUP BY orders.id;`, [id])
     .then((response) => {
       return response.rows[0];
     })
