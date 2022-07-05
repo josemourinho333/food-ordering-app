@@ -30,14 +30,14 @@
           <span class="added-desc">price: $<%=item.quantity*item.price/100%>
           <% total+=item.quantity*item.price/100 %></span>
           <button id="btn-update">Update</button>
-          </form>>
+          </form>
 
       </div>
 
     <% } %>
     <span>Sub-Total: <%= total %></span>
     <span>Tax: 5%</span>
-    <% const price = Math.round(total*100*tax)/100 %>
+    <% const total_price = Math.round(total*100*tax)/100 %>
     <span>Total: <%= total_price %> </span>
 
     <form method="POST" action="submit?">

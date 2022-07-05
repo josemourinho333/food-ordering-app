@@ -18,6 +18,7 @@
       <!-- <div class="menu"> -->
       <div class="row menu">
         <% for (items of menuItems) {%>
+
         <!-- menu items -->
         <div class="col-md-8 themed-grid-col menu-item">
           <div class="row mb-3">
@@ -44,12 +45,29 @@
                 <span>Price: $<%= items.price/100 %></span>
                 <form method="POST" action="/menu/add">
                   <span>Quantity:
+
                     <input
                       id="quantity"
                       placeholder="1"
                       type="number"
                       name="quantity"
-                      value="1"/>
+                      min="1"
+                      <%let temp = 1%>
+                      <% if (ordered.length>0){ %>
+                        <% for(order of ordered) {%>
+                      <% if (order.itemnumber == items.id){temp=order.quantity; break;} %>
+                      <%}}%>
+
+                      value="<%=temp%>"
+                      />
+<!--
+                        <input
+                        id="quantity"
+                        placeholder="1"
+                        type="number"
+                        name="quantity"
+                        value="1"/> -->
+
                   </span>
                   <input type="hidden" name="itemID" value="<%= items.id %>" />
                   <div id="add-to-cart">
@@ -59,7 +77,7 @@
                     <% if(order.itemnumber == items.id) { %>
                   <span id="item<%=item%>" style="visibility: visible;">
                     <i class="fa-solid fa-check added-icon"></i>
-
+                    <span class="added-ind">added</span>
                   <% break;}}  %>
                   </span>
                   </div>
