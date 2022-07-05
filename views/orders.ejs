@@ -15,7 +15,7 @@
     <% for (item of items) {%>
 
       <div class="added-item">
-          
+
           <span class="added-desc"><%= item.name %></span>
           <span>x</span>
           <form method ="POST" action="update?">
@@ -26,7 +26,9 @@
             name="quantity"
             value="<%= item.quantity %>"/>
           </span>
-          <button>Update</button>
+          <span class="added-desc">price: <%=item.price%></span>
+          <button id="btn-update">Update</button>
+
 
       </div>
 
