@@ -44,11 +44,44 @@
 
             <% if ( order.status_sent == true ) { %>
               <span class="order-line-info">
-                Order ID: <%= order.id %>, Date Created:
-                <% let orderDate = order.time_sent %>
- 
 
-                <%= orderDate %></span>
+                <span class="line-detail-box">
+                  <span class="field">Order ID:</span>
+                  <%= order.id %>
+                </span>
+
+                <span class="line-detail-box">
+                  <span class="field">Created on</span>
+                  <% const dateStr = ''+order.time_sent %>
+                  <% let orderDate = dateStr.slice(0,15)%>
+                  <% let orderTime = dateStr.slice(16,21)%>
+                  <%= orderDate %>, <%= orderTime %>
+                </span>
+
+                <%let status = 'Completed'; %>
+                <%let ETA = ''+order.time_of_pickup; %>
+
+                <% if(!order.status_finished) { status='Active'; %>
+                <!--  ETA = order  -->
+                <span class="line-detail-box stat-active">
+                  <span class="field">Status:</span>
+                  <%= status %>
+                </span>
+                <span class="line-end-box">
+                  <span class="field">Ready By:</span>
+                  <%= ETA.slice(16,21) %>
+                </span>
+                <% } else { %>
+
+
+                <span class="line-detail-box stat-complete">
+                  <span class="field">Status:</span>
+                  <%= status %>
+                </span>
+                <% } %>
+
+
+              </span>
             <% } %>
 
           <% } %>
