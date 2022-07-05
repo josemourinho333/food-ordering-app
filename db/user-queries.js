@@ -25,7 +25,7 @@ const getUserById = (id) => {
 
 const getAllOrdersByUserId = (id) => {
   // console.log('id',id)
-  return db.query(`SELECT orders.* FROM orders JOIN users ON users.id = orders.user_id WHERE users.id = $1 ORDER BY orders.time_sent DESC;`, [id])
+  return db.query(`SELECT orders.* FROM orders JOIN users ON users.id = orders.user_id WHERE users.id = $1 ORDER BY orders.time_sent DESC LIMIT 10;`, [id])
     .then((response) => {
       return response.rows;
     })
