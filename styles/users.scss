@@ -1,3 +1,6 @@
+$active: rgba(243, 24, 24, 0.263);
+$complete: aliceblue;
+
 .user-page {
   display: flex;
   flex-direction: row;
@@ -19,7 +22,7 @@
   display: flex;
   flex-direction: column;
   width: 60%;
-  margin-left: 30%;
+  margin-left: 25%;
 
 }
 
@@ -35,4 +38,22 @@
   border: 1px dotted #777;
   padding: 10px;
 }
+.line-detail-box{
+  border-right: 1px dotted #777;
+  padding: 10px;
+}
 
+.stat-active{
+  background-color: $active;
+}
+.stat-complete{
+  background-color: $complete;
+}
+
+.line-end-box{
+  background-color: $active;
+  padding: 10px;
+}
+.field{
+  font-weight: bold;
+}
