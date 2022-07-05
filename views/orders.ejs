@@ -13,34 +13,44 @@
     <div id="total-ordered-item">
       <% let total = 0; %>
       <% let tax = 1.05; %>
-    <% for (item of items) {%>
 
+    <!-- <ul style="list-style: none;"> -->
+    <% for (item of items) {%>
+      <!-- <li> -->
       <div class="added-item">
 
           <span class="added-desc"><%= item.name %></span>
           <span>x</span>
 
           <form method ="POST" action="/menu/order/update">
-          <span class="added-desc"> Quantity:
+            <span class="added-desc"> Quantity:
             <input
             id="quantity"
             type="number"
             name="quantity"
             value="<%= item.quantity %>"/>
+            </span>
 
-          </span>
-          <span class="added-desc">price: $<%=item.quantity*item.price/100%>
-          <% total+=item.quantity*item.price/100 %></span>
-          <button id="btn-update">Update</button>
+            <span class="added-desc">
+            price: $<%=item.quantity*item.price/100%>
+            <% total+=item.quantity*item.price/100 %>
+            </span>
+            <button class="btn-order update">Update</button>
+
           </form>
 
+
           <form method ="POST" action="/menu/order/delete">
-          <button id="btn-update">Delete</button>
+            <input type="hidden" id="orderID" name="orderID" value="<%= items[0].orderid %>"/>
+          <button class="btn-order remove">Remove</button>
+          </span>
           </form>
 
       </div>
+      <!-- </li> -->
 
     <% } %>
+    <!-- <ul> -->
     <span>Sub-Total: <%= total %></span>
     <span>Tax: 5%</span>
     <% const total_price = Math.round(total*100*tax)/100 %>
@@ -49,7 +59,7 @@
     <form method="POST" action="submit?">
       <input type="hidden" name="total_price" value="<%= total_price %>">
       <input type="hidden" name="orderID" value="<%= items[0].orderid %>">
-      <button id="place-order">Place Order</button>
+      <button class="btn-order place-order">Place Order</button>
     </form>
 
     <%} else { %>

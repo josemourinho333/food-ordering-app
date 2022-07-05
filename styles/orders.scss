@@ -10,28 +10,29 @@
 .added-item{
   display: flex;
   flex-direction: row;
-  width:100%;
-  justify-content: center;
+  width:60%;
+  justify-content: space-evenly;
   padding: 15px;
   margin: 5px;
   align-items: center;
 }
 .added-desc{
+  text-align: left;
+  width:140px;
   padding: 5px;
   margin: 5px;
 }
 
-#place-order{
+
+.btn-order{
+  background-color: white;
+  color: black;
   margin: 15px;
-  padding: 5px;
-  width:150px;
+  padding: 2px;
+  border: 2px solid;
 }
 
-p{
-  text-align: center;
-  font-size: 2rem;
+.place-order{
+  padding:15px;
 }
-#btn-update{
-  margin: 15px;
-  padding: 1px;
-}
+

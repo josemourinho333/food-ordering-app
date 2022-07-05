@@ -64,10 +64,11 @@
                   </span>
                   <input type="hidden" name="itemID" value="<%= items.id %>" />
                   <div id="add-to-cart">
-                  <button id = "<%=item%>" class="btn-add">Add to Cart</button>
 
+                  <button id = "<%=item%>" class="btn-add">Add to Cart</button>
                   <% for(order of ordered) {%>
                     <% if(order.itemnumber == items.id) { %>
+
                   <span id="item<%=item%>" style="visibility: visible;">
                     <i class="fa-solid fa-check added-icon"></i>
                     <span class="added-ind">added</span>
