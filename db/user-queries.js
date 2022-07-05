@@ -123,6 +123,7 @@ const updateStatusOwnerConfirm = (orderID, timeInMinutes) => {
 
 const getAllItemsInOrder = (id) => {
   return db.query(`SELECT orders.id AS orderID, order_items.menu_item_id AS itemNumber, menu_items.name, menu_items.price, order_items.quantity FROM order_items JOIN menu_items ON order_items.menu_item_id = menu_items.id JOIN orders ON orders.id = order_items.order_id WHERE orders.id = $1;`, [id])
+
     .then((response) => {
       return response.rows;
     })
