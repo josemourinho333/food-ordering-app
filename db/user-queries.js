@@ -34,7 +34,7 @@ const getAllOrdersByUserId = (id) => {
     });
 };
 const getAllSentOrdersAsAdmin = () => {
-  return db.query(`SELECT orders.* FROM orders WHERE orders.status_sent = true;`)
+  return db.query(`SELECT orders.id, MIN(users.name) AS name, orders.status_finished, orders.time_sent, orders.time_confirmed, orders.time_of_pickup, SUM(menu_items.price*order_items.quantity) AS total_sum FROM order_items JOIN menu_items ON order_items.menu_item_id = menu_items.id JOIN orders ON orders.id = order_items.order_id JOIN users ON users.id = orders.user_id WHERE orders.status_sent = true GROUP BY orders.id;`)
     .then((response) => {
       return response.rows;
     })
