@@ -8,10 +8,11 @@
   <div class="content">
     <h1>Place Orders</h1>
 
-
     <% if (items.length>0) {%>
     <h5>Total number of items Orded: <%= items.length %> for Order ID: <%= items[0].orderid %> </h5>
     <div id="total-ordered-item">
+      <% let total = 0; %>
+      <% let tax = 1.05; %>
     <% for (item of items) {%>
 
       <div class="added-item">
@@ -26,14 +27,24 @@
             name="quantity"
             value="<%= item.quantity %>"/>
           </span>
-          <span class="added-desc">price: $<%=item.quantity*item.price/100%></span>
+          <span class="added-desc">price: $<%=item.quantity*item.price/100%>
+          <% total+=item.quantity*item.price/100 %></span>
           <button id="btn-update">Update</button>
 
 
       </div>
 
     <% } %>
-    <form method="POST" action="submit?"><button id="place-order">Place Order</button></form>
+    <span>Sub-Total: <%= total %></span>
+    <span>Tax: 5%</span>
+    <% const price = Math.round(total*100*tax)/100 %>
+    <span>Total: <%= total_price %> </span>
+
+    <form method="POST" action="submit?">
+      <input type="hidden" name="total_price" value="<%= total_price %>">
+      <button id="place-order">Place Order</button>
+
+    </form>
 
     <%} else { %>
      <p> 0 Items in Cart 🛒</p>
