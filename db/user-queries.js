@@ -108,9 +108,13 @@ const updateStatusWhenOrderSent = (orderID) => {
     });
 };
 
-const updateStatusOwnerConfirm = (orderID, timeInMinutes) => {
-  let vals = [orderID, timeInMinutes]
-  return db.query(`UPDATE orders SET status_finished = 'true', time_confirmed = CURRENT_TIMESTAMP, time_of_pickup = CURRENT_TIMESTAMP + INTERVAL '$2 minutes'   WHERE orders.id = $1 RETURNING *;`, vals)
+// updated by Phil july 5th.. keep this one
+const updateStatusOwnerConfirm = (orderID, ETA) => {
+
+  let minutes = ETA + ' minutes';
+  let vals = [orderID, minutes];
+
+  return db.query("UPDATE orders SET status_finished = 'true', time_confirmed = CURRENT_TIMESTAMP, time_of_pickup = CURRENT_TIMESTAMP + cast($2 as INTERVAL)  WHERE orders.id = $1 RETURNING *;", vals)
     .then((response) => {
       return response.rows;
     })
