@@ -18,7 +18,7 @@
 
           <span class="added-desc"><%= item.name %></span>
           <span>x</span>
-          <form method ="POST" action="update?">
+          <form method ="POST" action="/menu/order/update">
           <span class="added-desc"> Quantity:
             <input
             id="quantity"
@@ -27,13 +27,15 @@
             value="<%= item.quantity %>"/>
           </span>
           <span class="added-desc">price: $<%=item.quantity*item.price/100%></span>
-          <button id="btn-update">Update</button>
+          <button id="btn-update">Update</button></form>
 
 
       </div>
 
     <% } %>
-    <form method="POST" action="submit?"><button id="place-order">Place Order</button></form>
+    <form method="POST" action="/menu/order/submit">
+      <button id="place-order" type="submit">Place Order</button>
+    </form>
 
     <%} else { %>
      <p> 0 Items in Cart 🛒</p>
