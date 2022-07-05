@@ -31,11 +31,16 @@ router.post('/add', (req, res) => {
   console.log('reqbody', req.body);
   userQueries.getAllOrdersByUserId(req.session.user_id)
     .then((orders) => {
-      const orderID = orders[orders.length - 1].id;
-      const itemID = req.body.itemID;
-      const quantity = req.body.quantity;
+      // console.log('***', orders);
+      // console.log('orderID', orders[0].id);
 
-      userQueries.addItemToOrder(orderID, itemID, quantity)
+      const orderInfo = {
+        orderId: orders[0].id,
+        itemId: req.body.itemID,
+        quantity: req.body.quantity,
+      };
+
+      userQueries.addItemToOrder(orderInfo)
         .then((result) => {
           console.log('result', result);
           userQueries.getAllItemsInOrder(result[0].order_id)
@@ -62,8 +67,8 @@ router.post('/add', (req, res) => {
 router.get('/order', (req, res) => {
   userQueries.getAllOrdersByUserId(req.session.user_id)
     .then((orders) => {
-      console.log('from 1st query', orders[orders.length - 1]);
-      const currentOrderID = orders[orders.length - 1].id;
+      console.log('from 1st query', orders[0]);
+      const currentOrderID = orders[0].id;
       userQueries.getAllItemsInOrder(currentOrderID)
         .then((items) => {
           const templateVars = {
