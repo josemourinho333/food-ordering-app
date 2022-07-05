@@ -46,7 +46,7 @@
     <% const total_price = Math.round(total*100*tax)/100 %>
     <span>Total: <%= total_price %> </span>
 
-    <form method="POST" action="submit?">
+    <form method="POST" action="/menu/order/submit">
       <input type="hidden" name="total_price" value="<%= total_price %>">
       <input type="hidden" name="orderID" value="<%= items[0].orderid %>">
       <button id="place-order">Place Order</button>
