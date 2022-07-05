@@ -110,8 +110,8 @@ router.get('/order', (req, res) => {
 // need twilio
 const txtSend = require('../twilio/twilio-queries');
 
-//TESTING
-const MessagingResponse = require('twilio').twiml.MessagingResponse;
+// //TESTING
+// const MessagingResponse = require('twilio').twiml.MessagingResponse;
 // POST /menu/order/submit - user clicks place order b utton and places the order. Twilio stuff should happen here
 router.post('/order/submit', (req, res) => {
   // update the order first to status sent = true. need to req.body.order_id.
