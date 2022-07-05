@@ -119,6 +119,10 @@ const updateStatusOwnerConfirm = (orderID, timeInMinutes) => {
     });
 };
 
+
+
+
+
 //  ORDER QUERIES
 
 const getAllItemsInOrder = (id) => {
@@ -151,6 +155,28 @@ const createOrder = (id) => {
       console.log(error.message);
     });
 };
+const EditItemInOrder = (item) => {
+  let vals = [item.orderId, item.itemId, item.quantity]
+  return db.query(`UPDATE order_items SET quantity = $3 WHERE order_id = $1 AND menu_item_id = $2  RETURNING *;`, vals)
+    .then((response) => {
+      return response.rows[0];
+    })
+    .catch((error) => {
+      console.log(error.message);
+    });
+};
+
+const DeleteItemInOrder = (item) => {
+  let vals = [item.orderId, item.itemId]
+  return db.query(`DELETE FROM order_items WHERE order_id = $1 AND menu_item_id = $2 ;`, vals)
+    .then((response) => {
+      return response.rows;
+    })
+    .catch((error) => {
+      console.log(error.message);
+    });
+};
+
 
 const getETAofOrder = (id) => {
   return db.query(`SELECT EXTRACT(EPOCH FROM (time_of_pickup - time_confirmed)/60) AS ETA FROM orders WHERE orders.id = $1;`, [id])
@@ -174,7 +200,7 @@ const getTotalInOrder = (id) => {
 // need to * with quantity if we`ll use it
 
 module.exports = {
-  getUsers, getUserById, createOrder, getAllOrdersByUserId, getAllSentOrdersAsAdmin, getAllItemsInOrder, addItemToOrder, updateStatusWhenOrderSent, updateStatusOwnerConfirm, getETAofOrder, getTotalInOrder
+  getUsers, getUserById, createOrder, getAllOrdersByUserId, getAllSentOrdersAsAdmin, getAllItemsInOrder, addItemToOrder, updateStatusWhenOrderSent, updateStatusOwnerConfirm, getETAofOrder, getTotalInOrder, DeleteItemInOrder, EditItemInOrder
 }
 
 // List of queries
