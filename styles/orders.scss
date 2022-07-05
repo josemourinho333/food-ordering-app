@@ -1,0 +1,22 @@
+
+#total-ordered-item{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+}
+.added-item{
+  display: flex;
+  flex-direction: row;
+  width:80%;
+  // justify-self: center;
+}
+
+#place-order{
+  width:150px;
+}
+
+p{
+  text-align: center;
+  font-size: 2rem;
+}
