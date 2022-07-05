@@ -99,8 +99,8 @@ router.get('/order', (req, res) => {
           const templateVars = {
             items,
           }
-          // console.log(templateVars);
-          res.render('orders', templateVars)
+          console.log('tempv in /order', templateVars);
+          res.render(`orders`, templateVars)
         })
     })
 });
@@ -123,9 +123,6 @@ router.post('/order/submit', (req, res) => {
       confirmedOrderID = confirmedOrder[0].id;
       const order = txtSend.newOrder(confirmedOrderID);
 
-        // .then((order) => {
-          console.log('***', order);
-          // V should return a promise, make it into a function, have it on its own route.
           router.post('/order/submit/sms', (request, response) => {
 
             const ETA = request.body.Body;
@@ -133,44 +130,16 @@ router.post('/order/submit', (req, res) => {
             txtSend.orderConfirmed(ETA, () => {
               console.log('eta in the callback', ETA);
               console.log('confirmedorderID', confirmedOrderID);
-              // res.redirect('/menu');
 
               if (!ETA) {
                 reject('nope');
               }
               response.send(ETA);
               res.send('outside');
-              // txtSend.orderConfirmed(ETA, () => {
-              //   console.log('eta in the callback', ETA);
-              //   console.log('confirmedorderID', confirmedOrderID);
-              //   res.redirect('/menu');
             });
-            // .then((ETA) => {
-            //   // txtSend.orderConfirmed(ETA, () => {
-            //   //   console.log('eta in the callback', ETA);
-            //   //   console.log('confirmedorderID', confirmedOrderID);
-            //   //   res.redirect('/menu');
-            //   // })
-            // })
           })
-        // })
     })
     .catch((error) => {console.log(error.message)});
-  // console.log(req.body);
-
-  // const twiml = new MessagingResponse();
-  // twiml.message('the robots are coming');
-
-  // res.writeHead(200, {'Content-Type': 'text/xml'});
-  // res.end(twiml.toString());
-
-
-  // txtSend.newOrder(test)
-  //   .then((result) => {
-  //     console.log('result', result);
-  //     txtSend.replyFromOwner();
-  //   })
-  //   .catch((error) => {console.log(error)});
 })
 
 module.exports = router;
