@@ -22,9 +22,9 @@
         <!-- menu items -->
         <div class="col-md-8 themed-grid-col menu-item">
           <div class="row mb-3">
-            <div class="col-md-2 themed-grid-item">
-              <div class="pb-3">
-                <div class="item-info">
+            <div class="col-md-2 themed-grid-item nomobile">
+              <div class="pb-3 ">
+                <div class="item-info ">
                   <span class="item-pic"
                     ><img id="cover-image" alt="<%= items.photo_url %>" src=" <%= items.photo_url %> "
                   /></span>
@@ -32,22 +32,22 @@
                 </div>
               </div>
             </div>
-            <div class="col-md-6 themed-grid-item">
+            <div id="left-side" class="col-md-6 themed-grid-item">
               <div class="pb-3">
                 <div class="item-info">
-                  <span><%= items.name %></span>
+                  <span id="item-title"><%= items.name %></span>
                   <span><%= items.description %></span>
                 </div>
               </div>
             </div>
-            <div class="col-md-3 themed-grid-item">
+            <div id="right-side" class="col-md-3 themed-grid-item ">
               <div id="add-order">
                 <span>Price: $<%= items.price/100 %></span>
                 <form method="POST" action="/menu/add">
                   <span>Quantity:
 
                     <input
-                      id="quantity"
+                      class="quantity"
                       placeholder="1"
                       type="number"
                       name="quantity"
