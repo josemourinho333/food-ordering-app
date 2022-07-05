@@ -25,7 +25,7 @@ const getUserById = (id) => {
 
 const getAllOrdersByUserId = (id) => {
   // console.log('id',id)
-  return db.query(`SELECT orders.* FROM orders JOIN users ON users.id = orders.user_id WHERE users.id = $1 ORDER BY orders.time_sent DESC LIMIT 10;`, [id])
+  return db.query(`SELECT orders.* FROM orders JOIN users ON users.id = orders.user_id WHERE users.id = $1 ORDER BY orders.time_sent DESC LIMIT 20;`, [id])
     .then((response) => {
       return response.rows;
     })
@@ -34,7 +34,8 @@ const getAllOrdersByUserId = (id) => {
     });
 };
 const getAllSentOrdersAsAdmin = () => {
-  return db.query(`SELECT orders.id, MIN(users.name) AS name, orders.status_finished, orders.time_sent, orders.time_confirmed, orders.time_of_pickup, SUM(menu_items.price*order_items.quantity) AS total_sum FROM order_items JOIN menu_items ON order_items.menu_item_id = menu_items.id JOIN orders ON orders.id = order_items.order_id JOIN users ON users.id = orders.user_id WHERE orders.status_sent = true GROUP BY orders.id;`)
+  // return db.query(`SELECT orders.id, MIN(users.name) AS name, orders.status_finished, orders.time_sent, orders.time_confirmed, orders.time_of_pickup, SUM(menu_items.price*order_items.quantity) AS total_sum FROM order_items JOIN menu_items ON order_items.menu_item_id = menu_items.id JOIN orders ON orders.id = order_items.order_id JOIN users ON users.id = orders.user_id WHERE orders.status_sent = true GROUP BY orders.id;`)
+  return db.query(`SELECT orders.id, orders.status_sent, orders.time_sent, MIN(users.name)  AS name, SUM(menu_items.price*order_items.quantity) AS total_sum  FROM orders LEFT JOIN order_items ON orders.id = order_items.order_id LEFT JOIN users ON users.id = orders.user_id LEFT JOIN menu_items ON order_items.menu_item_id = menu_items.id GROUP BY orders.id ORDER BY orders.time_sent DESC LIMIT 20;`)
     .then((response) => {
       return response.rows;
     })
