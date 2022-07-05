@@ -47,7 +47,8 @@ router.get('/:id', (req, res) => {
           return templateVars;
         })
         .then((templateVars) => {
-          userQueries.getAllItemsInOrder(templateVars.orders[templateVars.orders.length - 1].id)
+          console.log('here', templateVars);
+          userQueries.getAllItemsInOrder(templateVars.orders[0].id)
             .then((orderItemsInTheLatestOrder) => {
               templateVars.latestOrderItems = orderItemsInTheLatestOrder;
               // ...what it looks like
@@ -56,6 +57,7 @@ router.get('/:id', (req, res) => {
               //   orders,
               //   latestOrderItems
               // }
+              console.log(templateVars.latestOrderItems);
               res.render('users', templateVars);
             })
         })

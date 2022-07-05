@@ -19,7 +19,7 @@
 
           <span class="added-desc"><%= item.name %></span>
           <span>x</span>
-          <form method ="POST" action="update?">
+          <form method ="POST" action="/menu/order/update">
           <span class="added-desc"> Quantity:
             <input
             id="quantity"
@@ -30,7 +30,7 @@
           <span class="added-desc">price: $<%=item.quantity*item.price/100%>
           <% total+=item.quantity*item.price/100 %></span>
           <button id="btn-update">Update</button>
-          </form>>
+          </form>
 
       </div>
 
