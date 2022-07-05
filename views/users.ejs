@@ -6,7 +6,16 @@
     <div class="content">
       <h1>My Account</h1>
 
-      <h5>Total number of Orders: <%= orders.length %></h5>
+      <% let count = 0;%>
+
+      <% for (order of orders) { %>
+        <% if ( order.status_sent == true ) { %>
+          <% count++ %>
+
+      <% }} %>
+
+
+      <h5>Total number of Orders: <%= count %></h5>
 
 
       <!-- <div class="users"> -->
@@ -34,7 +43,7 @@
 
         <div id="order-info">
           <% for (order of orders) { %>
-            
+
             <% if ( order.status_sent == true ) { %>
               <span class="order-line-info">
                 <%= order.id %>, Date Created: <%= order.time_sent %></span>
