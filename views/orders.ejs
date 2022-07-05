@@ -15,10 +15,11 @@
     <% for (item of items) {%>
 
       <div class="added-item">
-
-          <span id="added-item"><%= item.name %>  </span>
+          
+          <span class="added-desc"><%= item.name %></span>
+          <span>x</span>
           <form method ="POST" action="update?">
-          <span id="added-quantity"> Quantity:
+          <span class="added-desc"> Quantity:
             <input
             id="quantity"
             type="number"
