@@ -49,7 +49,7 @@ router.get('/', (req, res) => {
         })
         .then((templateVars) => {
           console.log('here', templateVars);
-          res.render('users', templateVars);
+          res.render('admin', templateVars);
 
           // userQueries.getAllItemsInOrder(templateVars.orders[0].id)
           //   .then((orderItemsInTheLatestOrder) => {
@@ -91,6 +91,7 @@ router.get('/', (req, res) => {
 
 // GET /users/:id - finds user by :id, grabs all orders by the userID, then grabs order items of the latest order. Sent to Jesse now in templateVars.
 router.get('/:id', (req, res) => {
+  console.log('loggin sessionid', req.session.user_id)
   userQueries.getUserById(req.params.id)
     .then((user) => {
       const templateVars = {

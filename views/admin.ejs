@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('partials/_head.ejs') %>
+  <body>
+    <%- include('partials/_header') %>
+    <div class="content">
+      <h1>My Account</h1>
+
+      <% let count = 0;%>
+
+      <% for (order of orders) { %>
+        <% if ( order.status_sent == true ) { %>
+          <% count++ %>
+      <% }} %>
+
+
+      <h5>Total number of Orders: <%= count %></h5>
+
+      <!-- <div class="users"> -->
+      <div class="user-page">
+        <div id="user-info">
+          <span class="user-line-info">My Contact</span>
+          <span class="user-line-info"><%= user.name %>
+          <% if (user.is_admin) { %>
+            <i class="fa-solid fa-user-check" style="color:blue"></i>
+            <%} else { %>
+              <i class="fa-solid fa-user" style="color:green"></i>
+              <% } %>
+          </span>
+          <span class="user-line-info"><%= user.phone_number.slice(2) %></span>
+          <span class="user-line-info"><%= user.email %></span>
+          <span class="user-line-info"><%= user.street_address %></span>
+          <span class="user-line-info"><%= user.province %></span>
+          <span class="user-line-info"><%= user.postal_code %></span>
+          <span class="user-line-info"><%= user.country %></span>
+          <button>Edit</button>
+
+          <span></span>
+        </div>
+
+
+        <div id="order-info">
+          <% for (order of orders) { %>
+
+            <% if ( order.status_sent == true ) { %>
+              <span class="order-line-info">
+                Order ID: <%= order.id %>, Name: <%= order.name %>, Date Created:
+                <% let orderDate = order.day %>
+                <%= orderDate %>, Total Sum: <%= order.total_sum %>, Status completed: <%= order.status_finished %></span>
+            <% } %>
+
+          <% } %>
+
+        </div>
+      </div>
+      <div id="filler2">
+      </div>
+
+      <%- include('partials/_footer') %>
+
+    </div>
+  </body>
+</html>
