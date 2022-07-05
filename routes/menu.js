@@ -75,6 +75,8 @@ router.get('/order', (req, res) => {
     })
 });
 
+
+
 // need twilio
 const txtSend = require('../twilio/twilio-queries');
 
@@ -82,10 +84,46 @@ const txtSend = require('../twilio/twilio-queries');
 const MessagingResponse = require('twilio').twiml.MessagingResponse;
 // POST /menu/order/submit - user clicks place order b utton and places the order. Twilio stuff should happen here
 router.post('/order/submit', (req, res) => {
-  const test = 73;
+  // update the order first to status sent = true. need to req.body.order_id.
+  const test = 66;
+  let confirmedOrderID;
   userQueries.updateStatusWhenOrderSent(test)
     .then((confirmedOrder) => {
       console.log('order confirmed', confirmedOrder);
+      confirmedOrderID = confirmedOrder[0].id;
+      const order = txtSend.newOrder(confirmedOrderID);
+
+        // .then((order) => {
+          console.log('***', order);
+          // V should return a promise, make it into a function, have it on its own route.
+          router.post('/order/submit/sms', (request, response) => {
+
+            const ETA = request.body.Body;
+
+            txtSend.orderConfirmed(ETA, () => {
+              console.log('eta in the callback', ETA);
+              console.log('confirmedorderID', confirmedOrderID);
+              // res.redirect('/menu');
+
+              if (!ETA) {
+                reject('nope');
+              }
+              response.send(ETA);
+              res.send('outside');
+              // txtSend.orderConfirmed(ETA, () => {
+              //   console.log('eta in the callback', ETA);
+              //   console.log('confirmedorderID', confirmedOrderID);
+              //   res.redirect('/menu');
+            });
+            // .then((ETA) => {
+            //   // txtSend.orderConfirmed(ETA, () => {
+            //   //   console.log('eta in the callback', ETA);
+            //   //   console.log('confirmedorderID', confirmedOrderID);
+            //   //   res.redirect('/menu');
+            //   // })
+            // })
+          })
+        // })
     })
     .catch((error) => {console.log(error.message)});
   // console.log(req.body);
