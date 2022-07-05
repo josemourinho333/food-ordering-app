@@ -1,3 +1,8 @@
+$active: rgba(254, 1, 1, 0.438);
+$complete:aliceblue;
+
+
+
 .user-page {
   display: flex;
   flex-direction: row;
@@ -35,4 +40,20 @@
   border: 1px dotted #777;
   padding: 10px;
 }
+
+.line-detail-box{
+  padding: 10px;
+  border-right: 1px dotted #777;
+}
+
+.stat-active{
+  background-color: $active;
+
+}
+
+.stat-complete{
+  background-color: $complete;
+
+}
+
 
