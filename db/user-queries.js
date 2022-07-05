@@ -114,17 +114,19 @@ const getETAofOrder = (id) => {
     });
 };
 
-const getTotalInOrder = (id) => {
-  return db.query(`SELECT orders.id AS orderID, COUNT(order_items.id) AS total_items, SUM(menu_items.price) FROM order_items JOIN menu_items ON order_items.menu_item_id = menu_items.id JOIN orders ON orders.id = order_items.order_id WHERE orders.id = $1 GROUP BY orders.id;`, [id])
-    .then((response) => {
-      return response.rows[0];
-    })
-    .catch((error) => {
-      console.log(error.message);
-    });
-};
+// const getTotalInOrder = (id) => {
+//   return db.query(`SELECT orders.id AS orderID, COUNT(order_items.id) AS total_items, SUM(menu_items.price) FROM order_items JOIN menu_items ON order_items.menu_item_id = menu_items.id JOIN orders ON orders.id = order_items.order_id WHERE orders.id = $1 GROUP BY orders.id;`, [id])
+//     .then((response) => {
+//       return response.rows[0];
+//     })
+//     .catch((error) => {
+//       console.log(error.message);
+//     });
+// };
+// need to * with quanntity if we`ll use it
+
 module.exports = {
-  getUsers, getUserById, createOrder, getAllOrdersByUserId, getAllSentOrdersAsAdmin, getAllItemsInOrder, addItemToOrder, updateStatusWhenOrderSent, updateStatusOwnerConfirm, getETAofOrder, getTotalInOrder
+  getUsers, getUserById, createOrder, getAllOrdersByUserId, getAllSentOrdersAsAdmin, getAllItemsInOrder, addItemToOrder, updateStatusWhenOrderSent, updateStatusOwnerConfirm, getETAofOrder,
 }
 
 // List of queries
