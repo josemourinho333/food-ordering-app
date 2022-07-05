@@ -115,6 +115,7 @@ const txtSend = require('../twilio/twilio-queries');
 // POST /menu/order/submit - user clicks place order b utton and places the order. Twilio stuff should happen here
 router.post('/order/submit', (req, res) => {
   // update the order first to status sent = true. need to req.body.order_id.
+  const user = 2;
   const test = 66;
   let confirmedOrderID;
   userQueries.updateStatusWhenOrderSent(test)
@@ -135,7 +136,7 @@ router.post('/order/submit', (req, res) => {
                 reject('nope');
               }
               response.send(ETA);
-              res.send('outside');
+              res.redirect(`/users/2`);
             });
           })
     })
