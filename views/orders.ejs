@@ -19,31 +19,37 @@
 
           <span class="added-desc"><%= item.name %></span>
           <span>x</span>
-          <form method ="POST" action="update?">
+
+          <form method ="POST" action="/menu/order/update">
           <span class="added-desc"> Quantity:
             <input
             id="quantity"
             type="number"
             name="quantity"
             value="<%= item.quantity %>"/>
+
           </span>
           <span class="added-desc">price: $<%=item.quantity*item.price/100%>
           <% total+=item.quantity*item.price/100 %></span>
           <button id="btn-update">Update</button>
-          </form>>
+          </form>
+
+          <form method ="POST" action="/menu/order/delete">
+          <button id="btn-update">Delete</button>
+          </form>
 
       </div>
 
     <% } %>
     <span>Sub-Total: <%= total %></span>
     <span>Tax: 5%</span>
-    <% const price = Math.round(total*100*tax)/100 %>
+    <% const total_price = Math.round(total*100*tax)/100 %>
     <span>Total: <%= total_price %> </span>
 
     <form method="POST" action="submit?">
       <input type="hidden" name="total_price" value="<%= total_price %>">
+      <input type="hidden" name="orderID" value="<%= items[0].orderid %>">
       <button id="place-order">Place Order</button>
-
     </form>
 
     <%} else { %>

@@ -3,12 +3,6 @@ const { sms, to, from } = require('./sms');
 
 const orderConfirmed = (ETA, callback) => {
 
-  // const prepTime = 45;
-  // const ETA = order.order_placed;
-  // ETA.setMinutes(ETA.getMinutes() + 45);
-  // const etaHr = ETA.getHours();
-  // const etaMin = ETA.getMinutes();
-
   sms.messages
     .create({
       body: `Hi there,
@@ -25,21 +19,18 @@ const orderConfirmed = (ETA, callback) => {
     .catch((error) => {console.log(error.message)});
 };
 
-const orderReady = (order) => {
-  sms.messages
-    .create({
-      body: `Your order #${order.id} is ready for pick up, thank you! 😎`,
-      to: to,
-      from: from
-    })
-    .then((message) => {console.log(message)})
-    .catch((error) => {console.log(error.message)});
-};
+// const orderReady = (order) => {
+//   sms.messages
+//     .create({
+//       body: `Your order #${order.id} is ready for pick up, thank you! 😎`,
+//       to: to,
+//       from: from
+//     })
+//     .then((message) => {console.log(message)})
+//     .catch((error) => {console.log(error.message)});
+// };
 
 const newOrder = (order) => {
-    console.log('**** Inside newOrder ****');
-    console.log('you can see order', order);
-
     return sms.messages
     .create({
       body: `New order came in. Reply to confirm the order and let the customer know when their order will be ready.`,
@@ -53,17 +44,7 @@ const newOrder = (order) => {
     .catch((error) => {console.log(error.message)});
 };
 
-//TESTING
-const MessagingResponse = require('twilio').twiml.MessagingResponse;
-
-const replyFromOwner = () => {
-  exports.handler = function(context, event, callback) {
-    console.log(event);
-  }
-};
-
 module.exports = {
   orderConfirmed,
-  orderReady,
   newOrder,
 };
