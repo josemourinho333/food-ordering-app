@@ -19,8 +19,8 @@
 
           <span class="added-desc"><%= item.name %></span>
           <span>x</span>
-
-          <form method ="POST" action="/menu/order/update">
+          <!-- required change for req.params do not delete pls -->
+          <form method ="POST" action="/menu/order/<%=item.orderid%>&<%=item.itemnumber%>/update">
           <span class="added-desc"> Quantity:
             <input
             id="quantity"
@@ -29,13 +29,15 @@
             value="<%= item.quantity %>"/>
 
           </span>
+          <!-- adding req.params. Keep this. DO not delete. button type needs to be submit as well -->
           <span class="added-desc">price: $<%=item.quantity*item.price/100%>
           <% total+=item.quantity*item.price/100 %></span>
-          <button id="btn-update">Update</button>
+          <button type="submit" id="btn-update">Update</button>
           </form>
 
-          <form method ="POST" action="/menu/order/delete">
-          <button id="btn-update">Delete</button>
+          <!-- adding req.params. Keep this. DO not delete. button type needs to be submit as well -->
+          <form method ="POST" action='/menu/order/<%=item.orderid%>&<%=item.itemnumber%>/delete'>
+          <button type='submit' id="btn-update">Delete</button>
           </form>
 
       </div>
