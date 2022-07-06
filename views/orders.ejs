@@ -31,12 +31,6 @@
             value="<%= item.quantity %>"/>
             </span>
 
-            <span class="added-desc">
-            price: $<%=item.quantity*item.price/100%>
-            <% total+=item.quantity*item.price/100 %>
-            </span>
-            <button class="btn-order update">Update</button>
-
           </span>
           <!-- adding req.params. Keep this. DO not delete. button type needs to be submit as well -->
           <span class="added-desc">price: $<%=item.quantity*item.price/100%>
