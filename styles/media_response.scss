@@ -35,6 +35,12 @@
     width: 65%;
     margin-left: 5%;
   }
+  #admin-box{
+    font-size: small;
+  }
+  #admin-order-info{
+    margin-left:5%;
+  }
 
 }
 
@@ -54,9 +60,30 @@
   }
 }
 
-@media screen and (max-width:870px){
+@media screen and (max-width:875px){
   .date-mobile{
     display:none
+  }
+
+  .user-page{
+    display: flex;
+    flex-direction: column;
+  }
+
+  #user-info{
+    position: relative;
+    width: 85%;
+    flex-direction: row;
+    overflow-wrap: break-word;
+    justify-content: space-between;
+  }
+  #order-info {
+    margin-left: 16px;
+    width: 85%;
+  }
+  #admin-order-info {
+    margin-left: 16px;
+    width: 85%;
   }
 
 }
@@ -99,22 +126,7 @@
 
 
 @media screen and (max-width:635px){
-  .user-page{
-    display: flex;
-    flex-direction: column;
-  }
 
-  #user-info{
-    position: relative;
-    width: 85%;
-    flex-direction: row;
-    overflow-wrap: break-word;
-    justify-content: space-between;
-  }
-  #order-info {
-    margin-left: 16px;
-    width: 85%;
-  }
   .added-desc{
     width: 80px;
   }

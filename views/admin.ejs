@@ -6,53 +6,121 @@
     <div class="content">
       <h1>Admin Account</h1>
 
+
+      <% console.log("orders", orders.length)%>
+
       <% let count = 0;%>
+      <% let newOrders = [];%>
 
       <% for (order of orders) { %>
+        <% order.date = new Date(order.date) %>
+        <% order.day = order.date.toDateString()%>
+        <% order.time = order.date.toTimeString().slice(0,5)%>
         <% if ( order.status_sent == true ) { %>
-          <% count++ %>
-      <% }} %>
+
+          <!-- sort oldest unfinished order then newest finished order  -->
+          <%if(order.status_finished){ %>
+            <%   newOrders.push(order);%>
+             <%}else{%>
+              <% newOrders.unshift(order);%>
+             <%}%>
+          <% count++ }%>
+
+      <% } %>
+
+      <% console.log("count",count)%>
+
+      <% console.log("newOrders", newOrders) %>
+
+      <% orders = newOrders%>
 
 
-      <h5>List of previous orders: <%= count %></h5>
-
-      <!-- <div class="users"> -->
-      <div class="user-page">
-        <div id="user-info">
-          <span class="user-line-info">My Contact</span>
-          <span class="user-line-info"><%= user.name %>
-          <% if (user.is_admin) { %>
-            <i class="fa-solid fa-user-check" style="color:blue"></i>
-            <%} else { %>
-              <i class="fa-solid fa-user" style="color:green"></i>
-              <% } %>
-          </span>
-          <span class="user-line-info"><%= user.phone_number.slice(2) %></span>
-          <span class="user-line-info"><%= user.email %></span>
-          <span class="user-line-info"><%= user.street_address %></span>
-          <span class="user-line-info"><%= user.province %></span>
-          <span class="user-line-info"><%= user.postal_code %></span>
-          <span class="user-line-info"><%= user.country %></span>
-          <button>Edit</button>
-
-          <span></span>
-        </div>
+      <h5>Lastest sent orders: <%= count %></h5>
 
 
-        <div id="order-info">
+
+      <!-- <div class="users-info"> -->
+        <%- include('partials/_user_info.ejs') %>
+
+
+
+        <div id="admin-order-info">
           <% for (order of orders) { %>
 
             <% if ( order.status_sent == true ) { %>
-              <span class="order-line-info">
-                Order ID: <%= order.id %>, Name: <%= order.name %>, Date Created:
-                <% let orderDate = order.day %>
-                <%= orderDate %>, Total Sum: <%= order.total_sum %>, Status completed: <%= order.status_finished %></span>
-                <span>
-                  <!-- phil added new form and button here for notifying cx. DO not delete this. -->
-                  <form action="/users/ready/<%=order.id%>" method="GET">
-                  <button>notify cx order ready</button>
-                  </form>
+
+          <div id="admin-box">
+
+            <div class="admin-order-info">
+              <div class="line1">
+              <span class="admin-detail-box">
+                <span class="field"><span class="id-mobile">Order</span> ID: &nbsp</span>
+                <%= order.id %>&nbsp
+              </span>
+              <span class="admin-detail-box">
+                <span class="field ">Customer: &nbsp</span>
+                <em><%= order.name %>&nbsp</em>
+              </span>
+              <span class="admin-detail-box">
+                <span class="field ">Order Sum: &nbsp</span>
+                <em>$<%= Math.round(order.total_sum*1.05)/100 %>&nbsp</em>
+              </span>
+
+
+
+              <%let status = 'Fullfilled'; %>
+
+
+
+
+              </div>
+              <div class="line2">
+                <span class="admin-detail-box">
+
+                  <span class="field">Ordered on: &nbsp</span>
+                  <!-- <% const dateStr = ''+order.time_sent %>
+                  <% let orderDay = dateStr.slice(0,4)%>
+                  <% let orderDate = dateStr.slice(4,10)%>
+                  <% let orderYear = dateStr.slice(11,15)%>
+                  <% let orderTime = dateStr.slice(16,21)%> -->
+                  <%=order.day%> </span>
+                  <span class="admin-detail-box">At:&nbsp <%= order.time %></span>
+
+
+
+
+
+              </div>
+            </div>
+
+            <div class="box-end">
+
+
+              <!-- phil added new form and button here for notifying cx. DO not delete this. -->
+              <% if(!order.status_finished) { status='Active'; %>
+                <span class="admin-detail-box stat-active">
+                  <span class="field status-mobile">Status:</span>
+                  <%= status %>
+                  <% } %>
                 </span>
+
+              <% if (!order.status_finished) {%>
+                <!-- <span class="line-detail-box"> -->
+                  <form id="pick-up" action="/users/ready/<%=order.id%>" method="GET">
+                  <button class ="btn-pickup">Order Ready</button>
+                  </form>
+                <!-- </span> -->
+              <% } else{%>
+
+
+                <span class="end-box admin-complete">
+
+                  <em><%= status %></em>
+                </span>
+              <% } %>
+          </div>
+
+          </div>
             <% } %>
 
           <% } %>

@@ -1,0 +1,25 @@
+<div class="user-page">
+  <div id="user-info">
+    <div class ="user-info1">
+    <span class="user-line-info">My Contact</span>
+    <span class="user-line-info"><%= user.name %>
+    <% if (user.is_admin) { %>
+      <i class="fa-solid fa-user-check" style="color:blue"></i>
+      <%} else { %>
+        <i class="fa-solid fa-user" style="color:green"></i>
+        <% } %>
+    </span>
+    <span class="user-line-info"><%= user.phone_number.slice(2) %></span>
+    <span class="user-line-info"><%= user.email %></span>
+  </div>
+  <div class ="user-info2">
+    <span class="user-line-info"><%= user.street_address %></span>
+    <span class="user-line-info"><%= user.province %></span>
+    <span class="user-line-info"><%= user.postal_code %></span>
+    <span class="user-line-info"><%= user.country %></span>
+
+    <button class="btn-edit">Edit</button>
+    </div>
+
+    <span></span>
+  </div>
