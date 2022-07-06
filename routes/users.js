@@ -7,10 +7,20 @@
 
 const express = require('express');
 const router  = express.Router();
+const txtSend = require('../twilio/twilio-queries');
 
 // Subject to change per Denis
 const userQueries = require('../db/user-queries');
 
+// POST for when admin clicks order ready. it notifies the cx via SMS
+// /users/ready/:orderId
+router.get('/ready/:orderId', (req, res) => {
+  console.log('id catching', req.params);
+  const orderId = req.params.orderId;
+  txtSend.orderReady(orderId, () => {
+    res.redirect('/users/');
+  });
+})
 
 // GET /users/
 // router.get('/', (req, res) => {
@@ -48,7 +58,7 @@ router.get('/', (req, res) => {
           return templateVars;
         })
         .then((templateVars) => {
-          // console.log('here', templateVars);
+          console.log('here', templateVars);
           res.render('admin', templateVars);
 
         })

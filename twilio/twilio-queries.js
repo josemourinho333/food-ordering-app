@@ -19,16 +19,17 @@ const orderConfirmed = (ETA, callback) => {
     .catch((error) => {console.log(error.message)});
 };
 
-// const orderReady = (order) => {
-//   sms.messages
-//     .create({
-//       body: `Your order #${order.id} is ready for pick up, thank you! 😎`,
-//       to: to,
-//       from: from
-//     })
-//     .then((message) => {console.log(message)})
-//     .catch((error) => {console.log(error.message)});
-// };
+const orderReady = (orderId, callback) => {
+  sms.messages
+    .create({
+      body: `Your order #${orderId} is ready for pick up, thank you! 😎`,
+      to: to,
+      from: from
+    })
+    .then((message) => {console.log(message)})
+    .then(callback())
+    .catch((error) => {console.log(error.message)});
+};
 
 const newOrder = (order) => {
     return sms.messages
@@ -47,4 +48,5 @@ const newOrder = (order) => {
 module.exports = {
   orderConfirmed,
   newOrder,
+  orderReady
 };
