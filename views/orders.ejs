@@ -35,12 +35,12 @@
           <!-- adding req.params. Keep this. DO not delete. button type needs to be submit as well -->
           <span class="added-desc">price: $<%=item.quantity*item.price/100%>
           <% total+=item.quantity*item.price/100 %></span>
-          <button type="submit" id="btn-update">Update</button>
+          <button  class="btn-order update" type="submit" id="btn-update">Update</button>
           </form>
 
           <!-- adding req.params. Keep this. DO not delete. button type needs to be submit as well -->
           <form method ="POST" action='/menu/order/<%=item.orderid%>&<%=item.itemnumber%>/delete'>
-          <button type='submit' id="btn-update">Delete</button>
+          <button class="btn-order delete" type='submit' id="btn-update">Delete</button>
           </form>
 
       </div>
@@ -48,7 +48,7 @@
 
     <% } %>
     <!-- <ul> -->
-    <span>Sub-Total: <%= total %></span>
+    <span>Sub-Total: $<%= total %></span>
     <span>Tax: 5%</span>
     <% const total_price = Math.round(total*100*tax)/100 %>
     <span>Total: <%= total_price %> </span>
