@@ -1,0 +1,131 @@
+
+@media screen and (max-width:1199px){
+  .content{
+    margin-top: 110px;
+  }
+  .btn-cart{
+    margin-left: 10px;
+    width:11vw;
+  }
+
+}
+
+@media screen and (max-width:1140px){
+  .user-page{
+    font-size: 13px;
+  }
+  .added-item{
+    width:80%;
+  }
+}
+
+
+@media screen and (max-width:1000px){
+
+  #user-info{
+    position: relative;
+    width: 20%;
+    // flex-direction: row;
+    overflow-wrap: break-word;
+  }
+
+  #order-info {
+    // display: flex;
+    // flex-direction: column;
+    width: 65%;
+    margin-left: 5%;
+  }
+
+}
+
+
+@media screen and (max-width:991px){
+  .content{
+    margin-top: 200px;
+  }
+}
+
+@media screen and (max-width:930px){
+  .id-mobile{
+    display:none;
+  }
+  .quantity{
+    width: 2rem;
+  }
+}
+
+@media screen and (max-width:870px){
+  .date-mobile{
+    display:none
+  }
+
+}
+
+@media screen and (max-width:845px){
+  .content{
+    margin-top: 200px;
+  }
+  .nomobile{
+    display:none;
+  }
+  #left-side{
+    width:57%;
+    font-size: 0.9rem;
+  }
+  #right-side{
+    width:35%;
+  }
+  .btn-cart{
+    width:15vw;
+  }
+  .added-item{
+    width:99%;
+  }
+
+}
+
+@media screen and (max-width:730px){
+  .status-mobile{
+    display:none
+  }
+
+}
+
+
+@media screen and (max-width:635px){
+  .user-page{
+    display: flex;
+    flex-direction: column;
+  }
+
+  #user-info{
+    position: relative;
+    width: 85%;
+    flex-direction: row;
+    overflow-wrap: break-word;
+    justify-content: space-between;
+  }
+  #order-info {
+    margin-left: 16px;
+    width: 85%;
+  }
+  .added-desc{
+    width: 80px;
+  }
+}
+
+@media screen and (max-width:451px){
+  .content{
+    margin-top:270px;
+  }
+
+  .line-detail-box {
+    // flex-direction: column;
+    padding: 5px;
+    margin: 5px;
+    // width: 80%;
+
+  }
+
+}
+

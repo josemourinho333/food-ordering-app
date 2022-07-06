@@ -1,3 +1,6 @@
+$active: rgba(243, 24, 24, 0.263);
+$complete: aliceblue;
+
 .user-page {
   display: flex;
   flex-direction: row;
@@ -14,13 +17,21 @@
   padding: 1rem;
   margin-left: 1rem;
 }
+.user-info1{
+  display: flex;
+  flex-direction: column;
+}
+.user-info2{
+  display: flex;
+  flex-direction: column;
+
+}
 
 #order-info {
   display: flex;
   flex-direction: column;
   width: 60%;
   margin-left: 30%;
-
 }
 
 .user-line-info{
@@ -34,5 +45,31 @@
   margin-bottom: 10px;
   border: 1px dotted #777;
   padding: 10px;
+}
+.line-detail-box{
+  border-right: 1px dotted #777;
+  padding: 10px;
+}
+
+.line-detail-box{
+  padding: 10px;
+  border-right: 1px dotted #777;
+}
+
+.stat-active{
+  background-color: $active;
+
+}
+
+.stat-complete{
+  background-color: $complete;
+}
+
+.btn-edit{
+  background-color: white;
+  color: black;
+  margin: 15px;
+  padding: 2px;
+  border: 2px solid;
 }
 
