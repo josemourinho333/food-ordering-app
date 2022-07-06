@@ -85,21 +85,15 @@
                   <% let orderTime = dateStr.slice(16,21)%> -->
                   <%=order.day%> </span>
                   <span class="admin-detail-box">At:&nbsp <%= order.time %></span>
-
-
-
-
-
               </div>
             </div>
 
             <div class="box-end">
 
-
               <!-- phil added new form and button here for notifying cx. DO not delete this. -->
               <% if(!order.status_finished) { status='Active'; %>
-                <span class="admin-detail-box stat-active">
-                  <span class="field status-mobile">Status:</span>
+                <span class="admin-status stat-active">
+                  <span class="field status-mobile">Status: </span>
                   <%= status %>
                   <% } %>
                 </span>
