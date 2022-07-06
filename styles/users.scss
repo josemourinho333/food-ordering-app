@@ -1,7 +1,5 @@
-$active: rgba(254, 1, 1, 0.438);
-$complete:aliceblue;
-
-
+$active: rgba(243, 24, 24, 0.263);
+$complete: aliceblue;
 
 .user-page {
   display: flex;
@@ -46,6 +44,10 @@ $complete:aliceblue;
   margin-top: 10px;
   margin-bottom: 10px;
   border: 1px dotted #777;
+  padding: 10px;
+}
+.line-detail-box{
+  border-right: 1px dotted #777;
   padding: 10px;
 }
 
