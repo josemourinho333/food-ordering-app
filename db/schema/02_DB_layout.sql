@@ -3,6 +3,7 @@ DROP TABLE IF EXISTS menu_items CASCADE;
 DROP TABLE IF EXISTS orders CASCADE;
 DROP TABLE IF EXISTS order_items CASCADE;
 
+SET timezone = 'America/Los_Angeles';
 
 CREATE TABLE users (
   id SERIAL PRIMARY KEY NOT NULL,
