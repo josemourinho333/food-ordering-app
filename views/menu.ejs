@@ -45,34 +45,39 @@
                 <span>Price: $<%= items.price/100 %></span>
                 <form method="POST" action="/menu/add">
                   <span>Quantity:
+                    <%let temp = 1%>
+                    <% let show = false%>
+                    <% if (ordered.length>0){ %>
+                      <% for(order of ordered) {%>
+                    <% if (order.itemnumber == items.id){temp=order.quantity; show=true; break;} %>
 
+                    <%}}%>
                     <input
                       class="quantity"
                       placeholder="1"
                       type="number"
                       name="quantity"
                       min="1"
-                      <%let temp = 1%>
-                      <% if (ordered.length>0){ %>
-                        <% for(order of ordered) {%>
-                      <% if (order.itemnumber == items.id){temp=order.quantity; break;} %>
-                      <%}}%>
-
                       value="<%=temp%>"
                       />
 
-                  </span>
+
                   <input type="hidden" name="itemID" value="<%= items.id %>" />
                   <div id="add-to-cart">
 
-                  <button id = "<%=item%>" class="btn-add">Add to Cart</button>
-                  <% for(order of ordered) {%>
-                    <% if(order.itemnumber == items.id) { %>
-
+                  <button id = "<%=item%>" class="btn-add">
+                    <% if (show){%>
+                      <span style="color:red;">
+                      <%='Added'%>
+                        </span>
+                      <%}else{%>
+                        <%='Add'%>
+                      <%}%> to Cart</button>
+                      <%if (show) {%>
                   <span id="item<%=item%>" style="visibility: visible;">
                     <i class="fa-solid fa-check added-icon"></i>
-                    <span class="added-ind">added</span>
-                  <% break;}}  %>
+            </span>
+            <%}%>
                   </span>
                   </div>
                 </form>
