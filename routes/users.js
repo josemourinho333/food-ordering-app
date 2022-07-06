@@ -48,40 +48,15 @@ router.get('/', (req, res) => {
           return templateVars;
         })
         .then((templateVars) => {
-          console.log('here', templateVars);
+          // console.log('here', templateVars);
           res.render('admin', templateVars);
 
-          // userQueries.getAllItemsInOrder(templateVars.orders[0].id)
-          //   .then((orderItemsInTheLatestOrder) => {
-          //     templateVars.latestOrderItems = orderItemsInTheLatestOrder;
-          //     // ...what it looks like
-          //     // tempV = {
-          //     //   user,
-          //     //   orders,
-          //     //   latestOrderItems
-          //     // }
-          //     console.log("TEMP last order", templateVars.latestOrderItems);
-          //     console.log("TEMP all order", templateVars.orders);
-          //     console.log("TEMP user", templateVars.user);
-          //     res.render('users', templateVars);
-          //   })
         })
     })
     .catch((error) => {
       console.log(error.message);
     });
 
-
-
-    // need db/users queries
-    // userQueries.getUsers()
-    // .then((users) => {
-    //   console.log('admin page right here', users);
-    //   res.render('users', users.orders);
-    // })
-    // .catch((error) => {
-    //   console.log(error.message);
-    // });
   } else {
     console.log('redirect');
     return res.redirect(`/users/${req.session.user_id}`);
