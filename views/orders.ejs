@@ -8,14 +8,44 @@
   <div class="content">
     <h1>Place Orders</h1>
 
+   <!-- sorting items list to merge all same itemid -->
+   <% let itemsList = [{totalItems:0}]; %>
+
+   <% let uniqueItems = [...new Set(items.map(item => item.itemnumber))]; %>
+
+
+   <% for (unique of uniqueItems){ %>
+    <% let temp = {}%>
+    <% temp.itemnumber = unique %>
+    <% temp.price = 0 %>
+    <% temp.quantity = 0 %>
+    <% itemsList.push(temp) %>
+  <% } %>
+
+  <% console.log("itemsList before ",itemsList)%>
+
+   <% for (newItem of items){ %>
+       <% let match = itemsList.find(item=>item.itemnumber===newItem.itemnumber) %>
+       <% match.orderid = newItem.orderid %>
+       <% match.name = newItem.name %>
+       <% match.price += newItem.price %>
+       <% match.quantity += newItem.quantity %>
+       <% itemsList[0].totalItems += newItem.quantity %>
+   <% } %>
+
+   <% console.log("itemsList after",itemsList)%>
+   <!-- end sort -->
+
+
+
     <% if (items.length>0) {%>
-    <h5>Total number of items Orded: <%= items.length %> for Order ID: <%= items[0].orderid %> </h5>
+    <h5>Total number of items Orded: <%= itemsList[0].totalItems %> for Order ID: <%= items[0].orderid %> </h5>
     <div id="total-ordered-item">
       <% let total = 0; %>
       <% let tax = 1.05; %>
 
     <!-- <ul style="list-style: none;"> -->
-    <% for (item of items) {%>
+    <% for (item of itemsList.slice(1)) {%>
       <!-- <li> -->
       <div class="added-item">
 
