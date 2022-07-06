@@ -48,40 +48,15 @@ router.get('/', (req, res) => {
           return templateVars;
         })
         .then((templateVars) => {
-          console.log('here', templateVars);
-          res.render('users', templateVars);
+          // console.log('here', templateVars);
+          res.render('admin', templateVars);
 
-          // userQueries.getAllItemsInOrder(templateVars.orders[0].id)
-          //   .then((orderItemsInTheLatestOrder) => {
-          //     templateVars.latestOrderItems = orderItemsInTheLatestOrder;
-          //     // ...what it looks like
-          //     // tempV = {
-          //     //   user,
-          //     //   orders,
-          //     //   latestOrderItems
-          //     // }
-          //     console.log("TEMP last order", templateVars.latestOrderItems);
-          //     console.log("TEMP all order", templateVars.orders);
-          //     console.log("TEMP user", templateVars.user);
-          //     res.render('users', templateVars);
-          //   })
         })
     })
     .catch((error) => {
       console.log(error.message);
     });
 
-
-
-    // need db/users queries
-    // userQueries.getUsers()
-    // .then((users) => {
-    //   console.log('admin page right here', users);
-    //   res.render('users', users.orders);
-    // })
-    // .catch((error) => {
-    //   console.log(error.message);
-    // });
   } else {
     console.log('redirect');
     return res.redirect(`/users/${req.session.user_id}`);
@@ -91,6 +66,7 @@ router.get('/', (req, res) => {
 
 // GET /users/:id - finds user by :id, grabs all orders by the userID, then grabs order items of the latest order. Sent to Jesse now in templateVars.
 router.get('/:id', (req, res) => {
+  console.log('loggin sessionid', req.session.user_id)
   userQueries.getUserById(req.params.id)
     .then((user) => {
       const templateVars = {
