@@ -58,7 +58,7 @@ router.get('/', (req, res) => {
           return templateVars;
         })
         .then((templateVars) => {
-          // console.log('here', templateVars);
+          console.log('here', templateVars);
           res.render('admin', templateVars);
 
         })
