@@ -13,8 +13,10 @@
     <div id="total-ordered-item">
       <% let total = 0; %>
       <% let tax = 1.05; %>
-    <% for (item of items) {%>
 
+    <!-- <ul style="list-style: none;"> -->
+    <% for (item of items) {%>
+      <!-- <li> -->
       <div class="added-item">
 
           <span class="added-desc"><%= item.name %></span>
@@ -23,10 +25,17 @@
           <form method ="POST" action="/menu/order/<%=item.orderid%>&<%=item.itemnumber%>/update">
           <span class="added-desc"> Quantity:
             <input
-            id="quantity"
+            id="place-quantity"
             type="number"
             name="quantity"
             value="<%= item.quantity %>"/>
+            </span>
+
+            <span class="added-desc">
+            price: $<%=item.quantity*item.price/100%>
+            <% total+=item.quantity*item.price/100 %>
+            </span>
+            <button class="btn-order update">Update</button>
 
           </span>
           <!-- adding req.params. Keep this. DO not delete. button type needs to be submit as well -->
@@ -41,8 +50,10 @@
           </form>
 
       </div>
+      <!-- </li> -->
 
     <% } %>
+    <!-- <ul> -->
     <span>Sub-Total: <%= total %></span>
     <span>Tax: 5%</span>
     <% const total_price = Math.round(total*100*tax)/100 %>
@@ -51,7 +62,7 @@
     <form method="POST" action="/menu/order/submit">
       <input type="hidden" name="total_price" value="<%= total_price %>">
       <input type="hidden" name="orderID" value="<%= items[0].orderid %>">
-      <button id="place-order">Place Order</button>
+      <button class="btn-order place-order">Place Order</button>
     </form>
 
     <%} else { %>
