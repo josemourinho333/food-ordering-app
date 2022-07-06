@@ -19,6 +19,7 @@
       <!-- <div class="users"> -->
       <div class="user-page">
         <div id="user-info">
+          <div class ="user-info1">
           <span class="user-line-info">My Contact</span>
           <span class="user-line-info"><%= user.name %>
           <% if (user.is_admin) { %>
@@ -29,33 +30,40 @@
           </span>
           <span class="user-line-info"><%= user.phone_number.slice(2) %></span>
           <span class="user-line-info"><%= user.email %></span>
+        </div>
+        <div class ="user-info2">
           <span class="user-line-info"><%= user.street_address %></span>
           <span class="user-line-info"><%= user.province %></span>
           <span class="user-line-info"><%= user.postal_code %></span>
           <span class="user-line-info"><%= user.country %></span>
-          <button>Edit</button>
+
+          <button class="btn-edit">Edit</button>
+          </div>
 
           <span></span>
         </div>
 
 
         <div id="order-info">
+
           <% for (order of orders) { %>
 
             <% if ( order.status_sent == true ) { %>
               <span class="order-line-info">
 
                 <span class="line-detail-box">
-                  <span class="field">Order ID:</span>
+                  <span class="field"><span class="id-mobile">Order</span> ID:</span>
                   <%= order.id %>
                 </span>
 
                 <span class="line-detail-box">
                   <span class="field">Created on</span>
                   <% const dateStr = ''+order.time_sent %>
-                  <% let orderDate = dateStr.slice(0,15)%>
+                  <% let orderDay = dateStr.slice(0,4)%>
+                  <% let orderDate = dateStr.slice(4,10)%>
+                  <% let orderYear = dateStr.slice(11,15)%>
                   <% let orderTime = dateStr.slice(16,21)%>
-                  <%= orderDate %>, <%= orderTime %>
+                  <span class="date-mobile"><%=orderDay%></span> <%= orderDate %><span class="date-mobile">, <%=orderYear%>, <%= orderTime %></span>
                 </span>
 
                 <%let status = 'Completed'; %>
@@ -64,18 +72,25 @@
                 <% if(!order.status_finished) { status='Active'; %>
                 <!--  ETA = order  -->
                 <span class="line-detail-box stat-active">
-                  <span class="field">Status:</span>
+                  <span class="field status-mobile">Status:</span>
                   <%= status %>
                 </span>
-                <span class="line-end-box">
+
+                <% if (order.time_of_pickup != null){%>
+                <span class="line-detail-box stat-active">
                   <span class="field">Ready By:</span>
                   <%= ETA.slice(16,21) %>
                 </span>
                 <% } else { %>
+                  <span class="line-detail-box stat-active">
+                    <span class="field">Waiting confirmation</span>
+                  </span>
+                <% } %>
+                <% } else { %>
 
 
                 <span class="line-detail-box stat-complete">
-                  <span class="field">Status:</span>
+                  <span class="field status-mobile">Status:</span>
                   <%= status %>
                 </span>
                 <% } %>

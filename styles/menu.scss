@@ -76,7 +76,13 @@ $add-cart: #f2994a;
 
 #cover-image{
   width:7.5vw;
+  transition:transform 0.25s ease;
 }
+
+#item-title{
+  font-weight: bold;
+}
+
 
 #add-order {
   height: 150px;
@@ -87,7 +93,7 @@ $add-cart: #f2994a;
   width: 100%;
 }
 
-#quantity {
+.quantity {
   width: 3rem;
   margin-left: 0.1rem;
 }
@@ -140,6 +146,5 @@ $add-cart: #f2994a;
 .btn-cart{
   @include mybutton(8vw,0, $check-out,$white);
 }
-
 
 
