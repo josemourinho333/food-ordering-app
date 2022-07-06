@@ -36,10 +36,10 @@ CREATE TABLE orders (
   status_sent BOOLEAN NOT NULL DEFAULT false,
   status_finished BOOLEAN NOT NULL DEFAULT false,
   time_sent TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  time_confirmed TIMESTAMP DEFAULT CURRENT_TIMESTAMP + INTERVAL '10 minutes',
+  time_confirmed TIMESTAMP DEFAULT NULL,
   -- time_fulfilled not used currently
   -- time_fulfilled TIMESTAMP NOT NULL,
-  time_of_pickup TIMESTAMP DEFAULT CURRENT_TIMESTAMP + INTERVAL '45 minutes'
+  time_of_pickup TIMESTAMP DEFAULT NULL
 );
 
 CREATE TABLE order_items (
