@@ -85,7 +85,7 @@ const getAllSentOrdersAsAdmin = () => {
 
 const getAllItemsInOrder = (id) => {
   // return db.query(`SELECT orders.id AS orderID, order_items.menu_item_id AS itemNumber, menu_items.name, menu_items.price, order_items.quantity FROM order_items JOIN menu_items ON order_items.menu_item_id = menu_items.id JOIN orders ON orders.id = order_items.order_id WHERE orders.id = $1;`, [id])
-  return db.query(`SELECT orders.id AS orderID, order_items.menu_item_id AS itemNumber, MIN(menu_items.name), MIN(menu_items.price), SUM(order_items.quantity) FROM order_items JOIN menu_items ON order_items.menu_item_id = menu_items.id JOIN orders ON orders.id = order_items.order_id WHERE orders.id = $1 GROUP BY itemNumber, orders.id;`, [id])
+  return db.query(`SELECT orders.id AS orderID, order_items.menu_item_id AS itemNumber, MIN(menu_items.name) as name, MIN(menu_items.price) as price, SUM(order_items.quantity) as quantity FROM order_items JOIN menu_items ON order_items.menu_item_id = menu_items.id JOIN orders ON orders.id = order_items.order_id WHERE orders.id = $1 GROUP BY itemNumber, orders.id;`, [id])
 
     .then((response) => {
       return response.rows;
@@ -116,7 +116,11 @@ const createOrder = (id) => {
 };
 const EditItemInOrder = (item) => {
   let vals = [item.orderId, item.itemId, item.quantity]
-  return db.query(`UPDATE order_items SET quantity = $3 WHERE order_id = $1 AND menu_item_id = $2  RETURNING *;`, vals)
+  return db.query(`WITH foo AS (DELETE FROM order_items WHERE order_id = $1 AND menu_item_id = $2 RETURNING *)
+  INSERT INTO order_items ( order_id, menu_item_id, quantity)  VALUES  (  $1, $2, $3) RETURNING *;`, vals)
+  // return db.query(`UPDATE order_items SET quantity = $3 WHERE order_id = $1 AND menu_item_id = $2  RETURNING *;`, vals)
+  // return db.query(`DELETE FROM order_items WHERE order_id = $1 AND menu_item_id = $2 ;
+  // INSERT INTO order_items ( order_id, menu_item_id, quantity)  VALUES  ( $1, $2, $3) RETURNING *;`, vals)
     .then((response) => {
       return response.rows;
     })
@@ -156,10 +160,9 @@ const getTotalInOrder = (id) => {
       console.log(error.message);
     });
 };
-// need to * with quantity if we`ll use it
 
 module.exports = {
   getUsers, getUserById, createOrder, getAllOrdersByUserId, getAllSentOrdersAsAdmin, getAllItemsInOrder, addItemToOrder, updateStatusWhenOrderSent, updateStatusOwnerConfirm, getETAofOrder, getTotalInOrder, DeleteItemInOrder, EditItemInOrder
 }
 
-// List of queries
+
