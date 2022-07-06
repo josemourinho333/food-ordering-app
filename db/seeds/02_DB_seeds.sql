@@ -27,15 +27,15 @@ VALUES
     ('Sweet Potato Fries', 'Add Sweet Potato Fries to your burger', '190', 'https://i.ibb.co/ZG290nv/sweetpotato.jpg');
 
 INSERT INTO orders (
-    user_id)
+    user_id, status_sent, status_finished )
     VALUES
-    ( '1'),
-    ( '2'),
-    ( '2'),
-    ( '3'),
-    ( '4'),
-    ( '3'),
-    ( '1');
+    ( '1', true, true ),
+    ( '2', true, true),
+    ( '5', true, true),
+    ( '3', true, false),
+    ( '1', true, false),
+    ( '4', true, false),
+    ( '3', false, false);
 
 
 
@@ -44,9 +44,19 @@ INSERT INTO order_items ( order_id, menu_item_id, quantity)
  ( '1', '2', '1'),
  ( '1', '2', '1'),
  ( '2', '3', '3'),
- ( '3', '4', '1'),
- ( '4', '2', '2'),
- ( '3', '1', '3'),
- ( '1', '1', '1');
+ ( '2', '8', '1'),
+ ( '3', '7', '2'),
+ ( '4', '7', '3'),
+ ( '6', '4', '1'),
+ ( '6', '5', '3'),
+ ( '3', '11', '1'),
+ ( '4', '8', '2'),
+ ( '7', '10', '3'),
+ ( '5', '1', '1'),
+ ( '6', '10', '3'),
+ ( '3', '8', '1'),
+ ( '4', '8', '2'),
+ ( '7', '10', '3'),
+ ( '7', '12', '1');
 
 
