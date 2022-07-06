@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const txtSend = require('../twilio/twilio-queries');
 
 // subject to change per Denis
 const menuQueries = require('../db/menu-queries');
@@ -105,41 +106,70 @@ router.get('/order', (req, res) => {
     })
 });
 
-
-
-// need twilio
-const txtSend = require('../twilio/twilio-queries');
-
-//TESTING
-const MessagingResponse = require('twilio').twiml.MessagingResponse;
-// POST /menu/order/submit - user clicks place order b utton and places the order. Twilio stuff should happen here
-router.post('/order/submit', (req, res) => {
-  // update the order first to status sent = true. need to req.body.order_id.
-  const test = 66;
-  let confirmedOrderID;
-  userQueries.updateStatusWhenOrderSent(test)
-    .then((confirmedOrder) => {
-      console.log('order confirmed', confirmedOrder);
-      confirmedOrderID = confirmedOrder[0].id;
-      const order = txtSend.newOrder(confirmedOrderID);
-
-          router.post('/order/submit/sms', (request, response) => {
-
-            const ETA = request.body.Body;
-
-            txtSend.orderConfirmed(ETA, () => {
-              console.log('eta in the callback', ETA);
-              console.log('confirmedorderID', confirmedOrderID);
-
-              if (!ETA) {
-                reject('nope');
-              }
-              response.send(ETA);
-              res.send('outside');
-            });
-          })
+// updating item qty in order
+// item.orderId, item.itemId, item.quantity
+router.post('/order/:orderId&:itemId/update', (req, res) => {
+  const item = {
+    orderId: req.params.orderId,
+    itemId: req.params.itemId,
+    quantity: req.body.quantity
+  }
+  userQueries.EditItemInOrder(item)
+    .then((updatedItem) => {
+      res.redirect('/menu/order');
     })
     .catch((error) => {console.log(error.message)});
 })
+
+// deleting item off order
+router.post('/order/:orderId&:itemId/delete', (req, res) => {
+  userQueries.DeleteItemInOrder(req.params)
+    .then((result) => {
+      res.redirect('/menu/order');
+    })
+    .catch((error) => {console.log(error.message)});
+})
+
+
+
+// Working order submit solution
+router.post('/order/submit', (req, res) => {
+
+  console.log('am i getting the right info?', req.body);
+  // global variable for easier access.
+  let confirmedOrderID;
+  // pass in the orderID from post request
+  userQueries.updateStatusWhenOrderSent(req.body.orderID)
+    // get back the order that got updated (status_sent now TRUE)
+    .then((confirmedOrder) => {
+      console.log('order confirmed', confirmedOrder);
+      // assign the orderID to the global variable
+      confirmedOrderID = confirmedOrder[0].id;
+      // Txt will be sent now to the owner to confirm the order by replying with ETA
+      const order = txtSend.newOrder(confirmedOrderID);
+          // another post request for handling incoming SMS to twilio. Makes the previous POST hang until this new one gets a response.
+          router.post('/order/submit/sms', (request, response) => {
+            // my reply is assigned to ETA
+            const ETA = request.body.Body;
+            console.log('confirmedorderID', confirmedOrderID);
+            userQueries.updateStatusOwnerConfirm(confirmedOrderID, ETA)
+              .then((result) => {
+                console.log('set new pu time', result[0]);
+                txtSend.orderConfirmed(ETA, () => {
+
+                  if (!ETA) {
+                    reject('nope');
+                  }
+                  // sending response to end the post request.
+                  response.send(ETA);
+                  // redirecting the user to a new page where they can see their order.
+                  res.redirect(`/users/${req.session.user_id}`);
+                });
+              })
+              .catch((error) => {console.log(error.message)});
+          })
+    })
+    .catch((error) => {console.log(error.message)});
+});
 
 module.exports = router;

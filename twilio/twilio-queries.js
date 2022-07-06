@@ -33,7 +33,7 @@ const orderConfirmed = (ETA, callback) => {
 const newOrder = (order) => {
     return sms.messages
     .create({
-      body: `New order came in. Reply to confirm the order and let the customer know when their order will be ready.`,
+      body: `New order #${order} came in. Reply to confirm the order and let the customer know when their order will be ready.`,
       to: to,
       from: from
     })

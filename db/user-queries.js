@@ -25,7 +25,7 @@ const getUserById = (id) => {
 
 const getAllOrdersByUserId = (id) => {
   // console.log('id',id)
-  return db.query(`SELECT orders.* FROM orders JOIN users ON users.id = orders.user_id WHERE users.id = $1 ORDER BY orders.time_sent DESC;`, [id])
+  return db.query(`SELECT orders.* FROM orders JOIN users ON users.id = orders.user_id WHERE users.id = $1 ORDER BY orders.time_sent DESC LIMIT 20;`, [id])
     .then((response) => {
       return response.rows;
     })
@@ -34,7 +34,8 @@ const getAllOrdersByUserId = (id) => {
     });
 };
 const getAllSentOrdersAsAdmin = () => {
-  return db.query(`SELECT orders.* FROM orders WHERE orders.status_sent = true;`)
+  // return db.query(`SELECT orders.id, MIN(users.name) AS name, orders.status_finished, orders.time_sent, orders.time_confirmed, orders.time_of_pickup, SUM(menu_items.price*order_items.quantity) AS total_sum FROM order_items JOIN menu_items ON order_items.menu_item_id = menu_items.id JOIN orders ON orders.id = order_items.order_id JOIN users ON users.id = orders.user_id WHERE orders.status_sent = true GROUP BY orders.id;`)
+  return db.query(`SELECT orders.id, orders.status_sent, orders.time_sent, MIN(users.name)  AS name, SUM(menu_items.price*order_items.quantity) AS total_sum  FROM orders LEFT JOIN order_items ON orders.id = order_items.order_id LEFT JOIN users ON users.id = orders.user_id LEFT JOIN menu_items ON order_items.menu_item_id = menu_items.id GROUP BY orders.id ORDER BY orders.time_sent DESC LIMIT 20;`)
     .then((response) => {
       return response.rows;
     })
@@ -108,9 +109,13 @@ const updateStatusWhenOrderSent = (orderID) => {
     });
 };
 
-const updateStatusOwnerConfirm = (orderID, timeInMinutes) => {
-  let vals = [orderID, timeInMinutes]
-  return db.query(`UPDATE orders SET status_finished = 'true', time_confirmed = CURRENT_TIMESTAMP, time_of_pickup = CURRENT_TIMESTAMP + INTERVAL '$2 minutes'   WHERE orders.id = $1 RETURNING *;`, vals)
+// updated by Phil july 5th.. keep this one
+const updateStatusOwnerConfirm = (orderID, ETA) => {
+
+  let minutes = ETA + ' minutes';
+  let vals = [orderID, minutes];
+
+  return db.query("UPDATE orders SET status_finished = 'true', time_confirmed = CURRENT_TIMESTAMP, time_of_pickup = CURRENT_TIMESTAMP + cast($2 as INTERVAL)  WHERE orders.id = $1 RETURNING *;", vals)
     .then((response) => {
       return response.rows;
     })
@@ -118,6 +123,10 @@ const updateStatusOwnerConfirm = (orderID, timeInMinutes) => {
       console.log(error.message);
     });
 };
+
+
+
+
 
 //  ORDER QUERIES
 
@@ -151,6 +160,28 @@ const createOrder = (id) => {
       console.log(error.message);
     });
 };
+const EditItemInOrder = (item) => {
+  let vals = [item.orderId, item.itemId, item.quantity]
+  return db.query(`UPDATE order_items SET quantity = $3 WHERE order_id = $1 AND menu_item_id = $2  RETURNING *;`, vals)
+    .then((response) => {
+      return response.rows[0];
+    })
+    .catch((error) => {
+      console.log(error.message);
+    });
+};
+
+const DeleteItemInOrder = (item) => {
+  let vals = [item.orderId, item.itemId]
+  return db.query(`DELETE FROM order_items WHERE order_id = $1 AND menu_item_id = $2 ;`, vals)
+    .then((response) => {
+      return response.rows;
+    })
+    .catch((error) => {
+      console.log(error.message);
+    });
+};
+
 
 const getETAofOrder = (id) => {
   return db.query(`SELECT EXTRACT(EPOCH FROM (time_of_pickup - time_confirmed)/60) AS ETA FROM orders WHERE orders.id = $1;`, [id])
@@ -174,7 +205,7 @@ const getTotalInOrder = (id) => {
 // need to * with quantity if we`ll use it
 
 module.exports = {
-  getUsers, getUserById, createOrder, getAllOrdersByUserId, getAllSentOrdersAsAdmin, getAllItemsInOrder, addItemToOrder, updateStatusWhenOrderSent, updateStatusOwnerConfirm, getETAofOrder, getTotalInOrder
+  getUsers, getUserById, createOrder, getAllOrdersByUserId, getAllSentOrdersAsAdmin, getAllItemsInOrder, addItemToOrder, updateStatusWhenOrderSent, updateStatusOwnerConfirm, getETAofOrder, getTotalInOrder, DeleteItemInOrder, EditItemInOrder
 }
 
 // List of queries
