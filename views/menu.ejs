@@ -96,12 +96,14 @@
                   <div id="add-to-cart">
                   <button id = "<%=item%>" class="btn-add">
                     <% if (!show){%>
-                      <span style="color:red;">
+
                       <%='Add to Cart'%>
-                        </span>
+
                       <%}else{%>
+                        <span style="color:red;">
                         <%=numInCart%>
                         in Cart Add More!
+                      </span>
                       <%}%> </button>
                       <%if (show) {%>
                   <span style="visibility: visible;">
