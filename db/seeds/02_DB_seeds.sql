@@ -1,3 +1,4 @@
+SET timezone = 'America/Los_Angeles';
 INSERT INTO users (name, is_admin, phone_number, email, street_address, province, country, postal_code)
 VALUES
   ('Brennan Padilla','false','1-279-271-5628','ectus.quis@icloud.com','Ap #287-6384 Eu St.','Prince Edward Island','Canada','61C 5H7'),
@@ -27,15 +28,15 @@ VALUES
     ('Sweet Potato Fries', 'Add Sweet Potato Fries to your burger', '190', 'https://i.ibb.co/ZG290nv/sweetpotato.jpg');
 
 INSERT INTO orders (
-    user_id, status_sent, status_finished )
+    user_id, status_sent, status_finished, time_sent, time_confirmed, time_of_pickup )
     VALUES
-    ( '1', true, true ),
-    ( '2', true, true),
-    ( '5', true, true),
-    ( '3', true, false),
-    ( '1', true, false),
-    ( '4', true, false),
-    ( '3', false, false);
+    ( '1', true, true, CURRENT_TIMESTAMP - interval '23 hours', CURRENT_TIMESTAMP - interval '22 hours', CURRENT_TIMESTAMP - interval '21 hours' ),
+    ( '2', true, true, CURRENT_TIMESTAMP , CURRENT_TIMESTAMP + interval '1 hours', CURRENT_TIMESTAMP + interval '2 hours' ),
+    ( '5', true, true, CURRENT_TIMESTAMP + interval '1 hours', CURRENT_TIMESTAMP + interval '2 hours', CURRENT_TIMESTAMP + interval '3 hours' ),
+    ( '3', true, false, CURRENT_TIMESTAMP + interval '2 hours', NULL, NULL ),
+    ( '1', true, false, CURRENT_TIMESTAMP + interval '3 hours', NULL, NULL  ),
+    ( '4', true, false, CURRENT_TIMESTAMP + interval '4 hours', NULL, NULL  ),
+    ( '3', false, false, CURRENT_TIMESTAMP + interval '6 hours', NULL, NULL);
 
 
 
