@@ -142,8 +142,11 @@
     padding: 5px;
     margin: 5px;
     // width: 80%;
-
   }
-
 }
 
+@media sreen and (max-width: 380px){
+  .content{
+    width:380px;
+  }
+}

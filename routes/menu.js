@@ -80,7 +80,7 @@ router.post('/add', (req, res) => {
                     menuItems,
                     ordered,
                   }
-                  console.log('**tempv**', templateVars.ordered);
+                  console.log('**tempV.ordered**', templateVars.ordered);
                   res.render('menu', templateVars);
                 })
             })
