@@ -40,7 +40,8 @@ CREATE TABLE orders (
   time_confirmed TIMESTAMP DEFAULT NULL,
   -- time_fulfilled not used currently
   -- time_fulfilled TIMESTAMP NOT NULL,
-  time_of_pickup TIMESTAMP DEFAULT NULL
+  time_of_pickup TIMESTAMP DEFAULT NULL,
+  notification_sent BOOLEAN NOT NULL DEFAULT false
 );
 
 CREATE TABLE order_items (
