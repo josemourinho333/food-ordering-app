@@ -7,6 +7,9 @@
     margin-left: 10px;
     width:11vw;
   }
+  #admin-box{
+    font-size: small;
+  }
 
 }
 
@@ -36,9 +39,7 @@
     width: 65%;
     margin-left: 5%;
   }
-  #admin-box{
-    font-size: small;
-  }
+
   #admin-order-info{
     margin-left:5%;
   }
@@ -124,6 +125,12 @@
     display:none
   }
 
+  .line1{
+    padding:1px;
+  }
+  .line2{
+    padding:1px;
+  }
 }
 
 
@@ -131,6 +138,9 @@
 
   .added-desc{
     width: 80px;
+  }
+  .admin-mobile{
+    display: none;
   }
 }
 
@@ -145,6 +155,13 @@
     margin: 5px;
     // width: 80%;
   }
+
+  // .admin-mobile-show{
+  //   display: show;
+  // }
+
+  //admin page
+
 }
 
 @media sreen and (max-width: 380px){

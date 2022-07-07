@@ -155,6 +155,12 @@ router.post('/order/submit', (req, res) => {
             userQueries.updateStatusOwnerConfirm(confirmedOrderID, ETA)
               .then((result) => {
                 console.log('set new pu time', result[0]);
+
+                //trial
+
+
+                //
+
                 txtSend.orderConfirmed(ETA, () => {
 
                   if (!ETA) {
@@ -163,8 +169,8 @@ router.post('/order/submit', (req, res) => {
                   // sending response to end the post request.
                   response.send(ETA);
                   // redirecting the user to a new page where they can see their order.
-                  res.redirect(`/users/${req.session.user_id}`);
-                });
+                  res.redirect(`/users/`);
+                })
               })
               .catch((error) => {console.log(error.message)});
           })
