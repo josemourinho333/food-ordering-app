@@ -54,11 +54,9 @@ router.get('/', (req, res) => {
 // });
 
 router.post('/add', (req, res) => {
-  console.log('reqbody', req.body);
+  console.log('item trying to be added', req.body);
   userQueries.getAllOrdersByUserId(req.session.user_id)
     .then((orders) => {
-      // console.log('***', orders);
-      // console.log('orderID', orders[0].id);
 
       const orderInfo = {
         orderId: orders[0].id,
@@ -66,25 +64,65 @@ router.post('/add', (req, res) => {
         quantity: req.body.quantity,
       };
 
-      userQueries.addItemToOrder(orderInfo)
-        .then((result) => {
-          console.log('result', result);
-          userQueries.getAllItemsInOrder(result[0].order_id)
-            .then((ordered) => {
-              return ordered;
-            })
-            .then((ordered) => {
-              menuQueries.getMenuItems()
-                .then((menuItems) => {
-                  const templateVars = {
-                    menuItems,
-                    ordered,
-                  }
-                  console.log('**tempv**', templateVars.ordered);
-                  res.render('menu', templateVars);
+      let isAlreadyAdded = false;
+
+      userQueries.getAllItemsInOrder(orderInfo.orderId)
+        .then((allItems) => {
+          console.log('at 74', isAlreadyAdded);
+          for (const item of allItems) {
+            if (Number(orderInfo.itemId) === item.itemnumber) {
+              isAlreadyAdded = Number(orderInfo.itemId) === item.itemnumber;
+              const newQty = item.quantity + Number(orderInfo.quantity);
+              const updateItem = {
+                orderId: item.orderid,
+                itemId: item.itemnumber,
+                quantity: newQty,
+                orderItemsId: item.orderitemsid
+              };
+              console.log('what new update item should be', updateItem);
+              userQueries.EditItemInOrder(updateItem)
+                .then((updatedItem) => {
+                  userQueries.getAllItemsInOrder(updatedItem[0].order_id)
+                  .then((ordered) => {
+                    return ordered;
+                  })
+                  .then((ordered) => {
+                    menuQueries.getMenuItems()
+                      .then((menuItems) => {
+                        const templateVars = {
+                          menuItems,
+                          ordered,
+                        }
+                        res.render('menu', templateVars);
+                      })
+                  })
+                })
+            }
+          }
+          console.log('at 104', isAlreadyAdded);
+          if (!isAlreadyAdded) {
+            console.log('not matching, so add');
+            // adding item to order
+            userQueries.addItemToOrder(orderInfo)
+            .then((result) => {
+              userQueries.getAllItemsInOrder(result[0].order_id)
+                .then((ordered) => {
+                  return ordered;
+                })
+                .then((ordered) => {
+                  menuQueries.getMenuItems()
+                    .then((menuItems) => {
+                      const templateVars = {
+                        menuItems,
+                        ordered,
+                      }
+                      res.render('menu', templateVars);
+                    })
                 })
             })
+          }
         })
+
     })
     .catch((error) => {console.log(error)});
 });
@@ -93,14 +131,12 @@ router.post('/add', (req, res) => {
 router.get('/order', (req, res) => {
   userQueries.getAllOrdersByUserId(req.session.user_id)
     .then((orders) => {
-      console.log('from 1st query', orders[0]);
       const currentOrderID = orders[0].id;
       userQueries.getAllItemsInOrder(currentOrderID)
         .then((items) => {
           const templateVars = {
             items,
           }
-          console.log('tempv in /order', templateVars);
           res.render(`orders`, templateVars)
         })
     })
@@ -113,10 +149,16 @@ router.post('/order/:orderId&:itemId/update', (req, res) => {
     orderId: req.params.orderId,
     itemId: req.params.itemId,
     quantity: req.body.quantity
-  }
-  userQueries.EditItemInOrder(item)
-    .then((updatedItem) => {
-      res.redirect('/menu/order');
+  };
+  userQueries.getOrderItemsId(item)
+    .then((result) => {
+      item.orderItemsId = result[0].id;
+      console.log('new item obj', item);
+      userQueries.EditItemInOrder(item)
+        .then((updatedItem) => {
+          console.log('updated', updatedItem);
+          res.redirect('/menu/order');
+        })
     })
     .catch((error) => {console.log(error.message)});
 })
