@@ -59,7 +59,7 @@
     <form method="POST" action="/menu/order/submit">
       <input type="hidden" name="total_price" value="<%= total_price %>">
       <input type="hidden" name="orderID" value="<%= items[0].orderid %>">
-      <button class="btn-order place-order">Place Order</button>
+      <button class="btn-order place-order style-click"><span class="no-show">Place Order</span><span class="yes-show">Waiting Confirmation %>&nbsp<i class="fa-solid fa-sync fa-spin"></i></span></button>
     </form>
 
     <%} else { %>

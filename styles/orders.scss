@@ -39,3 +39,17 @@
 #place-quantity{
   width:50px;
 }
+.yes-show{
+  display:none;
+}
+
+.style-click:focus{
+  .no-show{
+    display: none;
+  }
+  .yes-show{
+    display: inline;
+  }
+  color:red;
+
+}

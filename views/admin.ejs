@@ -58,7 +58,7 @@
                 <span class="field"><span class="id-mobile">Order</span> ID: &nbsp</span>
                 <%= order.id %>&nbsp
               </span>
-              <span class="admin-detail-box">
+              <span class="admin-detail-box admin-mobile">
                 <span class="field ">Customer: &nbsp</span>
                 <em><%= order.name %>&nbsp</em>
               </span>
@@ -77,25 +77,27 @@
 
               </div>
               <div class="line2">
-                <span class="admin-detail-box">
+                <span class="admin-detail-box admin-mobile">
 
                   <span class="field">Ordered on: &nbsp</span>
 
-                  <%=order.day%>
+                  <em><%=order.day%></em>
                 </span>
                 <%let time = ''+order.time%>
-                <%console.log('timememememem',time.slice(0,2))%>
+
                 <span class="admin-detail-box">At:&nbsp
                   <% if (parseInt(time.slice(0,2))<12) { let am = order.time + ' am'; %>
-                  <%= am %>
+                  <em><%= am %></em>
                   <%}else{ let pm = parseInt(time.slice(0,2))-12+time.slice(2)+' pm'%>
-                  <%= pm %>
+                  <em><%= pm %></em>
                   <%}%>
+                  <% let shortDate = order.day; %>
+                  <!-- <span class= "admin-mobile-show" ><%= shortDate.slice(4,10) %></span> -->
 
                 </span>
 
                 <span class="admin-detail-box">
-                    <span class="field ">Order Sum: &nbsp</span>
+                    <span class="field "><span class ="admin-mobile">Order</span> Sum: &nbsp</span>
                     <em>$<%= Math.round(order.total_sum*1.05)/100 %>&nbsp</em>
                 </span>
               </div>
