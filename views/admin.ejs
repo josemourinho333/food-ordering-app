@@ -63,8 +63,8 @@
                 <em><%= order.name %>&nbsp</em>
               </span>
               <span class="admin-detail-box">
-                <span class="field ">Order Sum: &nbsp</span>
-                <em>$<%= Math.round(order.total_sum*1.05)/100 %>&nbsp</em>
+                <span class="field ">Phone: &nbsp</span>
+                <em><%= order.phone %></em>
               </span>
 
 
@@ -81,8 +81,23 @@
 
                   <span class="field">Ordered on: &nbsp</span>
 
-                  <%=order.day%> </span>
-                  <span class="admin-detail-box">At:&nbsp <%= order.time %></span>
+                  <%=order.day%>
+                </span>
+                <%let time = ''+order.time%>
+                <%console.log('timememememem',time.slice(0,2))%>
+                <span class="admin-detail-box">At:&nbsp
+                  <% if (parseInt(time.slice(0,2))<12) { let am = order.time + ' am'; %>
+                  <%= am %>
+                  <%}else{ let pm = parseInt(time.slice(0,2))-12+time.slice(2)+' pm'%>
+                  <%= pm %>
+                  <%}%>
+
+                </span>
+
+                <span class="admin-detail-box">
+                    <span class="field ">Order Sum: &nbsp</span>
+                    <em>$<%= Math.round(order.total_sum*1.05)/100 %>&nbsp</em>
+                </span>
               </div>
             </div>
 
