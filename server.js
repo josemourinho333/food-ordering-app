@@ -56,8 +56,13 @@ app.use('/menu', menuRoutes);
 
 app.get("/", (req, res) => {
   // admin id 2, change to whatever number you'd like here to see non-admin redirect
-  req.session.user_id = 2;
+  console.log('userid', req.session);
   res.render("index");
+});
+
+app.post('/login', (req, res) => {
+  req.session.user_id = 2;
+  res.redirect('/');
 });
 
 
