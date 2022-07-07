@@ -54,7 +54,7 @@
     <span>Sub-Total: $<%= Math.round(total)/100 %></span>
     <span>Tax: 5% ($<%=Math.round(total*0.05)/100%>)</span>
     <% const total_price = Math.round(total*tax)/100 %>
-    <span>Total: <%= total_price %> </span>
+    <span>Total: $<%= total_price %> </span>
 
     <form method="POST" action="/menu/order/submit">
       <input type="hidden" name="total_price" value="<%= total_price %>">
