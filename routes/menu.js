@@ -163,7 +163,7 @@ router.post('/order/submit', (req, res) => {
                   // sending response to end the post request.
                   response.send(ETA);
                   // redirecting the user to a new page where they can see their order.
-                  res.redirect(`/users/${req.session.user_id}`);
+                  res.redirect(`/users/`);
                 });
               })
               .catch((error) => {console.log(error.message)});
