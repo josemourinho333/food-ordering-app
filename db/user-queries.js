@@ -59,7 +59,6 @@ const getAllOrdersByUserId = (id) => {
   return db.query(`SELECT orders.* FROM orders JOIN users ON users.id = orders.user_id WHERE users.id = $1 ORDER BY orders.time_sent DESC LIMIT 20;`, [id])
   // return db.query(`SELECT orders.*, TO_CHAR (orders.time_sent, 'DD-MM-YYYY') AS DAY, SUM(menu_items.price*order_items.quantity) AS total_sum, FROM orders LEFT JOIN order_items ON orders.id = order_items.order_id LEFT JOIN menu_items ON order_items.menu_item_id = menu_items.id WHERE orders.status_sent = true AND orders.user_id = $1 GROUP BY orders.id ORDER BY orders.time_sent DESC LIMIT 20;`, [id])
     .then((response) => {
-      console.log('looking', response.rows);
       return response.rows;
     })
     .catch((error) => {
@@ -83,8 +82,22 @@ const getAllSentOrdersAsAdmin = () => {
 //#################################################################################
 //  ORDER QUERIES
 
+/// new query to get orderItems ID back
+const getOrderItemsId = (item) => {
+  let vals = [item.orderId, item.itemId];
+  return db.query(`SELECT * FROM order_items WHERE order_items.order_id = $1 AND order_items.menu_item_id = $2`, vals)
+    .then((response) => {
+      return response.rows;
+    })
+    .catch((error) => {
+      console.log(error.message);
+    });
+}
+
 const getAllItemsInOrder = (id) => {
-  return db.query(`SELECT orders.id AS orderID, order_items.menu_item_id AS itemNumber, menu_items.name, menu_items.price, order_items.quantity FROM order_items JOIN menu_items ON order_items.menu_item_id = menu_items.id JOIN orders ON orders.id = order_items.order_id WHERE orders.id = $1;`, [id])
+  // adding new column to show order_items.id as well
+  return db.query(`SELECT orders.id AS orderID, order_items.id AS orderItemsId, order_items.menu_item_id AS itemNumber, menu_items.name, menu_items.price, order_items.quantity FROM order_items JOIN menu_items ON order_items.menu_item_id = menu_items.id JOIN orders ON orders.id = order_items.order_id WHERE orders.id = $1;`, [id])
+  // return db.query(`SELECT orders.id AS orderID, order_items.menu_item_id AS itemNumber, menu_items.name, menu_items.price, order_items.quantity FROM order_items JOIN menu_items ON order_items.menu_item_id = menu_items.id JOIN orders ON orders.id = order_items.order_id WHERE orders.id = $1;`, [id])
 
     .then((response) => {
       return response.rows;
@@ -114,8 +127,12 @@ const createOrder = (id) => {
     });
 };
 const EditItemInOrder = (item) => {
-  let vals = [item.orderId, item.itemId, item.quantity]
-  return db.query(`UPDATE order_items SET quantity = $3 WHERE order_id = $1 AND menu_item_id = $2  RETURNING *;`, vals)
+  // let vals = [item.orderId, item.itemId, item.quantity]
+  // return db.query(`UPDATE order_items SET quantity = $3 WHERE order_id = $1 AND menu_item_id = $2  RETURNING *;`, vals)
+
+  /// NEW CHANGE - now takes in orderItemsID. Required
+  let vals = [item.orderId, item.itemId, item.quantity, item.orderItemsId]
+  return db.query(`UPDATE order_items SET quantity = $3 WHERE order_items.id = $4 AND order_id = $1 AND menu_item_id = $2  RETURNING *;`, vals)
     .then((response) => {
       return response.rows;
     })
@@ -158,7 +175,7 @@ const getTotalInOrder = (id) => {
 // need to * with quantity if we`ll use it
 
 module.exports = {
-  getUsers, getUserById, createOrder, getAllOrdersByUserId, getAllSentOrdersAsAdmin, getAllItemsInOrder, addItemToOrder, updateStatusWhenOrderSent, updateStatusOwnerConfirm, getETAofOrder, getTotalInOrder, DeleteItemInOrder, EditItemInOrder
+  getUsers, getUserById, createOrder, getAllOrdersByUserId, getAllSentOrdersAsAdmin, getAllItemsInOrder, addItemToOrder, updateStatusWhenOrderSent, updateStatusOwnerConfirm, getETAofOrder, getTotalInOrder, DeleteItemInOrder, EditItemInOrder, getOrderItemsId
 }
 
 // List of queries
