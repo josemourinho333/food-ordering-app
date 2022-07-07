@@ -22,7 +22,7 @@
       <!-- <li> -->
       <div class="added-item">
 
-          <span class="added-desc"><%= item.name %></span>
+          <span class="added-desc">No. <%=item.itemnumber%>. <%= item.name %></span>
           <span>x</span>
           <!-- required change for req.params do not delete pls -->
           <form method ="POST" action="/menu/order/<%=item.orderid%>&<%=item.itemnumber%>/update">
