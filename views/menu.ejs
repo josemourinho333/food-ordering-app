@@ -6,9 +6,15 @@
     <div class="content">
       <div id="menu-bar">
       <h1>MENU</h1>
+
+      <% let total_quantity = 0 %>
+      <% for (order of ordered) {%>
+        <% total_quantity += parseInt(order.quantity) %>
+      <% } %>
+
       <div id="menu-cart">
         <form method="GET" action="/menu/order">
-          <button type="add" class="btn-cart">Check Out <%= ordered.length%> items</button>
+          <button type="add" class="btn-cart">Check Out <%= total_quantity%> items</button>
         </form>
       </div>
       </div>
@@ -46,44 +52,24 @@
 <!--  -->
 
 
-                <!-- sorting items list to merge all same itemid -->
-                <% let itemsList = [{totalItems:0}]; %>
+<!-- sorting items list to merge all same itemid -->
+                <% let itemsList = ordered %>
 
-                <% let uniqueItems = [...new Set(ordered.map(item => item.itemnumber))]; %>
-
-
-                <% for (unique of uniqueItems){ %>
-                 <% let temp = {}%>
-                 <% temp.itemnumber = unique %>
-                 <% temp.price = 0 %>
-                 <% temp.quantity = 0 %>
-                 <% itemsList.push(temp) %>
-                <% } %>
-
-                <% console.log("itemsList before ",itemsList)%>
-
-                <% for (newItem of ordered){ %>
-                    <% let match = itemsList.find(item=>item.itemnumber===newItem.itemnumber) %>
-                    <% match.orderid = newItem.orderid %>
-                    <% match.name = newItem.name %>
-                    <% match.price += newItem.price %>
-                    <% match.quantity += newItem.quantity %>
-                    <% itemsList[0].totalItems += newItem.quantity %>
-                <% } %>
-
-                <% console.log("itemsList after",itemsList)%>
 <!--  -->
 
 
                 <!-- end sort -->
                 <form method="POST" action="/menu/add">
                   <span>Quantity:
-                    <%let numInCart = 1%>
-                    <% let show = false%>
+                    <% let numInCart = 1 %>
+                    <% let show = false %>
                     <% if (ordered.length>0){ %>
-                      <% for(order of itemsList.slice(1)) {%>
-                    <% if (order.itemnumber == items.id){numInCart=order.quantity; show=true; break;} %>
-                    <%}}%>
+                      <% for(order of itemsList) {%>
+                        <% if (order.itemnumber == items.id){numInCart=order.quantity; show=true; break;%>
+                        <%console.log(order)%>
+                        <% } %>
+                      <% } %>
+                    <% } %>
                     <input
                       class="quantity"
                       placeholder="1"
@@ -101,7 +87,7 @@
 
                       <%}else{%>
                         <span style="color:red;">
-                        <%=numInCart.slice(1)%>
+                        <%=numInCart%>
                         in Cart <br>Add More!
                       </span>
                       <%}%> </button>
