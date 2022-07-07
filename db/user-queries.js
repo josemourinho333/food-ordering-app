@@ -69,7 +69,7 @@ const getAllOrdersByUserId = (id) => {
 const getAllSentOrdersAsAdmin = () => {
   // return db.query(`SELECT orders.id, MIN(users.name) AS name, orders.status_finished, orders.time_sent, orders.time_confirmed, orders.time_of_pickup, SUM(menu_items.price*order_items.quantity) AS total_sum FROM order_items JOIN menu_items ON order_items.menu_item_id = menu_items.id JOIN orders ON orders.id = order_items.order_id JOIN users ON users.id = orders.user_id WHERE orders.status_sent = true GROUP BY orders.id;`)
   // return db.query(`SELECT orders.id, orders.status_sent, orders.time_sent, MIN(users.name)  AS name, SUM(menu_items.price*order_items.quantity) AS total_sum  FROM orders LEFT JOIN order_items ON orders.id = order_items.order_id LEFT JOIN users ON users.id = orders.user_id LEFT JOIN menu_items ON order_items.menu_item_id = menu_items.id GROUP BY orders.id ORDER BY orders.time_sent DESC LIMIT 20;`)
-  return db.query(`SELECT orders.id, orders.status_sent, DATE(orders.time_sent), TO_CHAR (orders.time_sent, 'DD-MM-YYYY') AS DAY, MIN(users.name)  AS name, SUM(menu_items.price*order_items.quantity) AS total_sum, orders.status_finished  FROM orders LEFT JOIN order_items ON orders.id = order_items.order_id LEFT JOIN users ON users.id = orders.user_id LEFT JOIN menu_items ON order_items.menu_item_id = menu_items.id GROUP BY orders.id ORDER BY orders.time_sent DESC LIMIT 20;`)
+  return db.query(`SELECT orders.id, orders.status_sent, orders.notification_sent ,orders.time_sent AS orig_date,DATE(orders.time_sent), TO_CHAR (orders.time_sent, 'DD-MM-YYYY') AS DAY, MIN(users.name)  AS name, SUM(menu_items.price*order_items.quantity) AS total_sum, orders.status_finished, MIN(users.phone_number) AS phone FROM orders LEFT JOIN order_items ON orders.id = order_items.order_id LEFT JOIN users ON users.id = orders.user_id LEFT JOIN menu_items ON order_items.menu_item_id = menu_items.id GROUP BY orders.id ORDER BY orders.time_sent DESC`)
     .then((response) => {
       return response.rows;
     })
@@ -161,8 +161,22 @@ const getTotalInOrder = (id) => {
     });
 };
 
+const UpdateNotificationSent = (id)=> {
+  return db.query(`
+  UPDATE orders
+  SET notification_sent = true
+  WHERE orders.id = $1`,[id])
+  .then((response) => {
+    return response.rows;
+  })
+  .catch((error) => {
+    console.log(error.message);
+  });
+};
+
+
 module.exports = {
-  getUsers, getUserById, createOrder, getAllOrdersByUserId, getAllSentOrdersAsAdmin, getAllItemsInOrder, addItemToOrder, updateStatusWhenOrderSent, updateStatusOwnerConfirm, getETAofOrder, getTotalInOrder, DeleteItemInOrder, EditItemInOrder
+  getUsers, getUserById, createOrder, getAllOrdersByUserId, getAllSentOrdersAsAdmin, getAllItemsInOrder, addItemToOrder, updateStatusWhenOrderSent, updateStatusOwnerConfirm, getETAofOrder, getTotalInOrder, DeleteItemInOrder, EditItemInOrder, UpdateNotificationSent
 }
 
 

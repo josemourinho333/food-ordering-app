@@ -6,9 +6,15 @@
     <div class="content">
       <div id="menu-bar">
       <h1>MENU</h1>
+
+      <% let total_quantity = 0 %>
+      <% for (order of ordered) {%>
+        <% total_quantity += parseInt(order.quantity) %>
+      <% } %>
+
       <div id="menu-cart">
         <form method="GET" action="/menu/order">
-          <button type="add" class="btn-cart">Check Out <%= ordered.length%> items</button>
+          <button type="add" class="btn-cart">Check Out <%= total_quantity%> items</button>
         </form>
       </div>
       </div>
@@ -43,40 +49,59 @@
             <div id="right-side" class="col-md-3 themed-grid-item ">
               <div id="add-order">
                 <span>Price: $<%= items.price/100 %></span>
+<!--  -->
+
+
+<!-- sorting items list to merge all same itemid -->
+                <% let itemsList = ordered %>
+
+<!--  -->
+
+
+                <!-- end sort -->
                 <form method="POST" action="/menu/add">
                   <span>Quantity:
-
+                    <% let numInCart = 1 %>
+                    <% let show = false %>
+                    <% if (ordered.length>0){ %>
+                      <% for(order of itemsList) {%>
+                        <% if (order.itemnumber == items.id){numInCart=order.quantity; show=true; break;%>
+                        <%console.log(order)%>
+                        <% } %>
+                      <% } %>
+                    <% } %>
                     <input
                       class="quantity"
                       placeholder="1"
                       type="number"
                       name="quantity"
                       min="1"
-                      <%let temp = 1%>
-                      <% if (ordered.length>0){ %>
-                        <% for(order of ordered) {%>
-                      <% if (order.itemnumber == items.id){temp=order.quantity; break;} %>
-                      <%}}%>
-
-                      value="<%=temp%>"
+                      value="1"
                       />
-
-                  </span>
                   <input type="hidden" name="itemID" value="<%= items.id %>" />
                   <div id="add-to-cart">
+                  <button id = "<%=item%>" class="btn-add">
+                    <% if (!show){%>
 
-                  <button id = "<%=item%>" class="btn-add">Add to Cart</button>
-                  <% for(order of ordered) {%>
-                    <% if(order.itemnumber == items.id) { %>
+                      <%='Add to Cart'%>
 
-                  <span id="item<%=item%>" style="visibility: visible;">
+                      <%}else{%>
+                        <span style="color:red;">
+                        <%=numInCart%>
+                        in Cart <br>Add More!
+                      </span>
+                      <%}%> </button>
+                      <%if (show) {%>
+                  <span style="visibility: visible;">
                     <i class="fa-solid fa-check added-icon"></i>
-                    <span class="added-ind">added</span>
-                  <% break;}}  %>
+            </span>
+            <%}%>
                   </span>
                   </div>
                 </form>
+
               </div>
+
             </div>
           </div>
         </div>

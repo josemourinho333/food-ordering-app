@@ -12,13 +12,47 @@ const txtSend = require('../twilio/twilio-queries');
 // Subject to change per Denis
 const userQueries = require('../db/user-queries');
 
+//Jesse's test post
+// router.post('/ready/:orderId', (req, res) => {
+//   console.log("req.body : ",req.body);
+//   console.log('id catching', req.params);
+//   const orderId = req.params.orderId;
+//   txtSend.orderReady(orderId, () => {
+//   })
+
+//   ;
+// })
+
 // POST for when admin clicks order ready. it notifies the cx via SMS
 // /users/ready/:orderId
 router.get('/ready/:orderId', (req, res) => {
   console.log('id catching', req.params);
   const orderId = req.params.orderId;
   txtSend.orderReady(orderId, () => {
-    res.redirect('/users/');
+
+    // update notification and return object array
+    userQueries.UpdateNotificationSent(orderId);
+    userQueries.getUserById(2)
+    .then((user) => {
+      const templateVars = {
+        user,
+      }
+      return templateVars;
+    }).then((templateVars) => {
+      userQueries.getAllSentOrdersAsAdmin()
+        .then((orders) => {
+          templateVars.orders = orders;
+          return templateVars;
+        })
+        .then((templateVars) => {
+          console.log('here', templateVars);
+          res.render('admin', templateVars);
+
+        })
+    })
+    .catch((error) => {
+      console.log(error.message);
+    });
   });
 })
 
