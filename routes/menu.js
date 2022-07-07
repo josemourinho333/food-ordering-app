@@ -72,6 +72,7 @@ router.post('/add', (req, res) => {
           for (const item of allItems) {
             if (Number(orderInfo.itemId) === item.itemnumber) {
               isAlreadyAdded = Number(orderInfo.itemId) === item.itemnumber;
+              console.log('current qty', item.quantity, 'to add on', orderInfo.quantity);
               const newQty = item.quantity + Number(orderInfo.quantity);
               const updateItem = {
                 orderId: item.orderid,
