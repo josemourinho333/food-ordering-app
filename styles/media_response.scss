@@ -25,6 +25,7 @@
   #user-info{
     position: relative;
     width: 20%;
+    height:35vh;
     // flex-direction: row;
     overflow-wrap: break-word;
   }
@@ -76,6 +77,7 @@
     flex-direction: row;
     overflow-wrap: break-word;
     justify-content: space-between;
+    height:23vh;
   }
   #order-info {
     margin-left: 16px;

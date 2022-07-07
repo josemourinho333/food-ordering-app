@@ -37,7 +37,7 @@
           </span>
           <!-- adding req.params. Keep this. DO not delete. button type needs to be submit as well -->
           <span class="added-desc">price: $<%=item.quantity*item.price/100%>
-          <% total+=item.quantity*item.price/100 %></span>
+          <% total+=item.quantity*item.price %></span>
           <button  class="btn-order update" type="submit" id="btn-update">Update</button>
           </form>
 
@@ -51,9 +51,9 @@
 
     <% } %>
     <!-- <ul> -->
-    <span>Sub-Total: $<%= total %></span>
-    <span>Tax: 5%</span>
-    <% const total_price = Math.round(total*100*tax)/100 %>
+    <span>Sub-Total: $<%= Math.round(total)/100 %></span>
+    <span>Tax: 5% ($<%=Math.round(total*0.05)/100%>)</span>
+    <% const total_price = Math.round(total*tax)/100 %>
     <span>Total: <%= total_price %> </span>
 
     <form method="POST" action="/menu/order/submit">
